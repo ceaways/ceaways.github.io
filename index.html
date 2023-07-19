@@ -1,0 +1,1848 @@
+	<!DOCTYPE html>
+<html lang="en-US" class="no-js">
+	<head>
+		<meta charset="UTF-8" />
+		<meta http-equiv="X-UA-Compatible" content="IE=edge">
+		<meta name="viewport" content="width=device-width, initial-scale=1">
+		<title>CeaWays!</title>
+		<meta name="description" content="An interactive 3D CEA building map concept with a search and pin indicators for every floor. " />
+		<meta name="keywords" content="CeaWays map, 3d, css, javascript, pin, floor map" />
+		<meta name="Group 1- BSCOE 2-3 [Software Development]" content="Codrops" />
+		<link rel="icon" href="img/PUPLogo.png" type="image/x-icon" />
+		<link rel="stylesheet" type="text/css" href="css/normalize.css" />
+		<link rel="stylesheet" type="text/css" href="css/style.css" />
+		<script src="js/modernizr-custom.js"></script>
+	</head>
+	<body>
+		<svg class="hidden">
+			<defs>
+				<symbol id="icon-pin" viewBox="0 0 200 300">
+					<title>pin</title>
+					<path d="M100,21.78A85,85,0,0,0,15.18,106.6c0,18.85,12.08,49.52,36.76,93.9,17.48,31.36,34.7,57.49,35.47,58.6L100,278.22l12.59-19.11c0.69-1.11,18-27.25,35.47-58.6,24.76-44.38,36.76-75.06,36.76-93.9A85,85,0,0,0,100,21.78Z" />
+				</symbol>
+				<symbol id="icon-search" viewBox="0 0 32 32">
+					<title>search</title>
+					<path class="path1" d="M26.819 24.917c0.262 0.262 0.262 0.688 0 0.951l-0.951 0.951c-0.263 0.262-0.688 0.262-0.951 0l-6.656-6.656c-0.072-0.072-0.12-0.158-0.153-0.248-1.365 0.998-3.041 1.593-4.862 1.593-4.562 0-8.261-3.699-8.261-8.261s3.699-8.261 8.261-8.261c4.562 0 8.261 3.699 8.261 8.261 0 1.821-0.595 3.497-1.593 4.862 0.091 0.032 0.176 0.080 0.248 0.153l6.656 6.656zM13.246 7.739c-3.041 0-5.508 2.466-5.508 5.508s2.466 5.508 5.508 5.508 5.508-2.466 5.508-5.508c0-3.041-2.466-5.508-5.508-5.508z"></path>
+				</symbol>
+				<symbol id="icon-stack" viewBox="0 0 32 32">
+					<title>stack</title>
+					<path class="path1" d="M29.143 11.071l-13.143-6.571-13.143 6.571 13.143 6.571 13.143-6.571zM16 6.681l8.781 4.39-8.781 4.39-8.781-4.39 8.781-4.39zM26.51 14.684l2.633 1.316-13.143 6.571-13.143-6.571 2.633-1.316 10.51 5.255zM26.51 19.612l2.633 1.316-13.143 6.571-13.143-6.571 2.633-1.316 10.51 5.255z"></path>
+				</symbol>
+				<symbol id="icon-angle-up" viewBox="0 0 21 32">
+					<title>angle-up</title>
+					<path class="path1" d="M19.196 21.143q0 0.232-0.179 0.411l-0.893 0.893q-0.179 0.179-0.411 0.179t-0.411-0.179l-7.018-7.018-7.018 7.018q-0.179 0.179-0.411 0.179t-0.411-0.179l-0.893-0.893q-0.179-0.179-0.179-0.411t0.179-0.411l8.321-8.321q0.179-0.179 0.411-0.179t0.411 0.179l8.321 8.321q0.179 0.179 0.179 0.411z"></path>
+				</symbol>
+				<symbol id="icon-angle-down" viewBox="0 0 21 32">
+					<title>angle-down</title>
+					<path class="path1" d="M19.196 13.143q0 0.232-0.179 0.411l-8.321 8.321q-0.179 0.179-0.411 0.179t-0.411-0.179l-8.321-8.321q-0.179-0.179-0.179-0.411t0.179-0.411l0.893-0.893q0.179-0.179 0.411-0.179t0.411 0.179l7.018 7.018 7.018-7.018q0.179-0.179 0.411-0.179t0.411 0.179l0.893 0.893q0.179 0.179 0.179 0.411z"></path>
+				</symbol>
+				<symbol id="icon-cross" viewBox="0 0 24 24">
+					<title>cross</title>
+					<path class="
+					path1" d="M18.016 5.125q0.369 0 0.614 0.245t0.245 0.614q0 0.363-0.248 0.611l-5.411 5.405 5.411 5.405q0.248 0.248 0.248 0.611 0 0.369-0.245 0.614t-0.614 0.245q-0.363 0-0.611-0.248l-5.405-5.411-5.405 5.411q-0.248 0.248-0.611 0.248-0.369 0-0.614-0.245t-0.245-0.614q0-0.363 0.248-0.611l5.411-5.405-5.411-5.405q-0.248-0.248-0.248-0.611 0-0.369 0.245-0.614t0.614-0.245q0.363 0 0.611 0.248l5.405 5.411 5.405-5.411q0.248-0.248 0.611-0.248z"></path>
+			</defs>
+		</svg>
+		<div class="container">
+			<div class="main">
+				<header class="codrops-header">
+					<div class="codrops-links">
+						<a class="codrops-icon codrops-icon--prev" href="" title="Previous Demo"><span>Previous Demo</span></a>
+					</div>
+					<h1> CEAways Map</h1>
+				</header>
+				<div class="mall">
+					<div class="surroundings">
+						<img class="surroundings__map" src="img/surroundings.svg" alt="Surroundings"/>
+					</div>
+					<div class="levels">
+						<div class="level level--1" aria-label="Level 1">
+							<svg class="map map--1" viewBox="0 0 1200 800" width="100%" height="100%" preserveAspectRatio="xMidYMid meet">
+
+
+								<title>Map Level 1</title>
+								
+								<rect x="12.72" y="12.59" width="1174.56" height="774.82" class="map__ground" />
+								<rect x="12.72" y="12.59" width="1174.56" height="774.82" class="map__outline"/>
+								<!-- This is where the rooms start -->
+								<!-- Top rooms -->
+								<rect data-space="1.08" x="148.2" y="12.59" width="200.8" height="105.6" class="map__space" />
+							
+								<rect data-space="1.07" x="349.0" y="12.59" width="75.3" height="105.6" class="map__space" />
+							
+								<rect data-space="1.06" x="424.3" y="12.59" width="125.5" height="105.6" class="map__space" />
+							
+								<rect data-space="1.05" x="549.8" y="12.59" width="175.7" height="105.6" class="map__space" />
+							
+								<rect data-space="1.04" x="725.5" y="12.59" width="125.5" height="105.6" class="map__space" />
+							
+								<rect data-space="1.03" x="851.0" y="12.59" width="200.8" height="105.6" class="map__space" />
+							
+								<!-- Kaliwa -->
+								<rect data-space="1.01" x="12.59" y="83.03" width="100.4" height="633.6" class="map__space" />
+								
+							
+								<!-- bottom rooms -->
+								<rect data-space="1.10" x="148.26" y="668.8" width="200.8" height="105.6" class="map__space" />
+							
+								<rect data-space="1.11" x="349.06" y="668.8" width="200.8" height="105.6" class="map__space" />
+							
+								<rect data-space="1.01" x="549.86" y="704" width="100.4" height="70.4" class="map__space" />
+							
+								<rect data-space="1.12" x="650.26" y="668.8" width="200.8" height="105.6" class="map__space" />
+							
+								<rect data-space="1.13" x="851.06" y="668.8" width="200.8" height="105.6" class="map__space" />
+								<!-- Kanan -->
+								<rect data-space="1.01" x="1086.87" y="492.8" width="100.4" height="228.8" class="map__space" />
+								
+								<rect data-space="1.02" x="1086.87" y="70.44" width="100.4" height="228.8" class="map__space" />
+								<!-- Gitna -->
+							
+								<rect data-space="1.09" x="148.26" y="193.5" width="140.56" height="281.6" class="map__space" />
+							
+								<rect data-space="1.10" x="288.82" y="193.5" width="135.54" height="387.2" class="map__space" />
+							
+								<rect data-space="1.11" x="424.36" y="193.5" width="125.5" height="126.72" class="map__space" />
+							
+								<rect data-space="1.01" x="424.36" y="320.22" width="125.5" height="260.48" class="map__space" />
+							
+								<rect data-space="1.01" x="590.02" y="193.5" width="185.74" height="387.2" class="map__space" />
+							
+								<rect data-space="1.14" x="775.76" y="193.5" width="276.1" height="387.2" class="map__space" />
+							
+								<rect x="916.5" y="188.5" width="140.56" height="105.6" class="map__outline" />
+							</svg>
+							<div class="level__pins">
+								<a class="pin pin--1-1" data-category="1" data-space="1.01" href="#" aria-label="Pin for Power and Steam Lab (RM 100)">
+									<span class="pin__icon">
+										<svg class="icon icon--pin"><use xlink:href="#icon-pin"></use></svg>
+									</span>
+								</a>
+								<a class="pin pin--1-2" data-category="1" data-space="1.02" href="#" aria-label="Pin for Welding and Foundry Shop (RM 101)">
+									<span class="pin__icon">
+										<svg class="icon icon--pin"><use xlink:href="#icon-pin"></use></svg>
+									</span>
+								</a>
+								<a class="pin pin--1-3" data-category="1" data-space="1.03" href="#" aria-label="Pin for Automotive Lab (RM 102)">
+									<span class="pin__icon">
+										<svg class="icon icon--pin"><use xlink:href="#icon-pin"></use></svg>
+									</span>
+								</a>
+								<a class="pin pin--1-4" data-category="1" data-space="1.04" href="#" aria-label="Pin for Mechanical Design lab (RM 103)">
+									<span class="pin__icon">
+										<svg class="icon icon--pin"><use xlink:href="#icon-pin"></use></svg>
+									</span>
+								</a>
+								<a class="pin pin--1-5" data-category="1" data-space="1.05" href="#" aria-label="Pin for Plumbing Tech Lab (RM 104)">
+									<span class="pin__icon">
+										<svg class="icon icon--pin"><use xlink:href="#icon-pin"></use></svg>
+									</span>
+								</a>
+								<a class="pin pin--1-6" data-category="1" data-space="1.06" href="#" aria-label="Pin for Soil Mechanics Lab (RM 105A)">
+									<span class="pin__icon">
+										<svg class="icon icon--pin"><use xlink:href="#icon-pin"></use></svg>
+									</span>
+								</a>
+								<a class="pin pin--1-7" data-category="1" data-space="1.07" href="#" aria-label="Pin for C.E. Lab Office (RM 105B)">
+									<span class="pin__icon">
+										<svg class="icon icon--pin"><use xlink:href="#icon-pin"></use></svg>
+									</span>
+								</a>
+								<a class="pin pin--1-8" data-category="1" data-space="1.08" href="#" aria-label="Pin for Material and Testing Lab (RM 106)">
+									<span class="pin__icon">
+										<svg class="icon icon--pin"><use xlink:href="#icon-pin"></use></svg>
+									</span>
+								</a>
+								<a class="pin pin--1-9" data-category="1" data-space="1.09" href="#" aria-label="Pin for Electrical Power Lab (RM 107)">
+									<span class="pin__icon">
+										<svg class="icon icon--pin"><use xlink:href="#icon-pin"></use></svg>
+									</span>
+								</a>
+								<a class="pin pin--1-10" data-category="1" data-space="1.10" href="#" aria-label="Pin for Electrical Workshop Lab (RM 108)">
+									<span class="pin__icon">
+										<svg class="icon icon--pin"><use xlink:href="#icon-pin"></use></svg>
+									</span>
+								</a>
+								<a class="pin pin--1-11" data-category="1" data-space="1.11" href="#" aria-label="Pin for Civil Engineering Tech Lab (RM 109)">
+									<span class="pin__icon">
+										<svg class="icon icon--pin"><use xlink:href="#icon-pin"></use></svg>
+									</span>
+								</a>
+								<a class="pin pin--1-12" data-category="1" data-space="1.12" href="#" aria-label="Pin for Conditionaing Lab (RM 110)">
+									<span class="pin__icon">
+										<svg class="icon icon--pin"><use xlink:href="#icon-pin"></use></svg>
+									</span>
+								</a>
+								<a class="pin pin--1-13" data-category="1" data-space="1.13" href="#" aria-label="Pin for Fluid and Hydrualics Lab (RM 111)">
+									<span class="pin__icon">
+										<svg class="icon icon--pin"><use xlink:href="#icon-pin"></use></svg>
+									</span>
+								</a>
+								<a class="pin pin--1-14" data-category="1" data-space="1.14" href="#" aria-label="Pin for Thermodynamics Lab (RM 112)">
+									<span class="pin__icon">
+										<svg class="icon icon--pin"><use xlink:href="#icon-pin"></use></svg>
+									</span>
+								</a>
+								<a class="pin pin--1-15" data-category="1" data-space="1.15" href="#" aria-label="Pin for Machine Shop (RM 113)">
+									<span class="pin__icon">
+										<svg class="icon icon--pin"><use xlink:href="#icon-pin"></use></svg>
+									</span>
+								</a>
+								<a class="pin pin--1-16" data-category="1" data-space="1.16" href="#" aria-label="Pin for Dean's office (RM 115)">
+									<span class="pin__icon">
+										<svg class="icon icon--pin"><use xlink:href="#icon-pin"></use></svg>
+									</span>
+								</a>
+								<a class="pin pin--1-17" data-category="1" data-space="1.17" href="#" aria-label="Pin for Faculty Room (RM 116)">
+									<span class="pin__icon">
+										<svg class="icon icon--pin"><use xlink:href="#icon-pin"></use></svg>
+									</span>
+								</a>
+							</div>
+							<!-- /level__pins -->
+						</div>
+						<div class="level level--2" aria-label="Level 2">
+							<svg class="map map--2" viewBox="0 0 1200 800" width="100%" height="100%" preserveAspectRatio="xMidYMid meet">
+								<title>Map Level 2</title>
+								<rect x="12.72" y="12.59" width="1174.56" height="774.82" class="map__ground"  />
+								<rect x="12.72" y="12.59" width="1174.56" height="774.82" class="map__outline" />
+
+								<rect data-space="1.01" x="160.98" y="12.59" width="198.40" height="112.80" class="map__space" />
+
+								<rect data-space="1.02" x="359.38" y="12.59" width="198.40" height="112.80" class="map__space" />
+
+								<rect data-space="1.03" x="557.78" y="12.59" width="188.48" height="112.80" class="map__space" />
+
+								<rect data-space="1.04" x="746.26" y="12.59" width="74.40" height="112.80" class="map__space" />
+
+								<rect data-space="3.01" x="820.96" y="12.59" width="74.40" height="112.80" class="map__space" />
+
+								<rect data-space="3.01" x="895.36" y="12.59" width="74.40" height="112.80" class="map__space" />
+
+								<rect data-space="3.01" x="969.76" y="12.59" width="99.20" height="112.80" class="map__space" />
+
+								<!-- Kaliwa -->
+								<rect data-space="3.01" x="12.59" y="87.79" width="133.92" height="248.16" class="map__space" />
+
+								<rect data-space="3.01" x="12.59" y="335.95" width="133.92" height="150.40" class="map__space" />
+								
+								<rect data-space="3.01" x="12.59" y="486.35" width="133.92" height="150.40" class="map__space" />
+
+								<!-- bottom rooms -->
+								<rect data-space="1.01" x="160.98" y="662.02" width="148.80" height="112.80" class="map__space" />
+
+								<rect data-space="1.01" x="309.78" y="662.02" width="198.40" height="112.80" class="map__space" />
+
+								<rect data-space="1.01" x="508.18" y="662.02" width="163.68" height="112.80" class="map__space" />
+
+								<rect data-space="1.01" x="671.86" y="662.02" width="198.40" height="112.80" class="map__space" />
+
+								<rect data-space="1.01" x="870.26" y="662.02" width="198.40" height="112.80" class="map__space" />
+								<!-- Kanan -->
+								<rect data-space="1.01" x="1085.74" y="448.75" width="133.92" height="263.20" class="map__space" />
+								
+								<rect data-space="1.01" x="1085.74" y="260.75" width="133.92" height="188" class="map__space" />
+
+								<rect data-space="1.01" x="1085.74" y="87.79" width="133.92" height="172.96" class="map__space" />
+								<!-- Gitna -->
+
+								<rect data-space="1.01" x="189.62" y="193.5" width="99.20" height="285.76" class="map__space" />
+								
+								<rect data-space="1.01" x="189.62" y="479.26" width="99.20" height="120.32" class="map__space" />
+
+								<rect data-space="1.01" x="288.82" y="193.5" width="138.88" height="406.08" class="map__space" />
+
+								<rect data-space="1.01" x="433.78" y="193.5" width="124" height="135.36" class="map__space" />
+
+								<rect data-space="1.01" x="433.78" y="328.86" width="124" height="127.84" class="map__space" />
+
+								<rect data-space="1.01" x="433.78" y="456.70" width="124" height="142.88" class="map__space" />
+
+
+
+
+								<rect data-space="1.01" x="614.72" y="212.59" width="183.52" height="406.08" class="map__space" />
+
+								<rect data-space="1.01" x="798.24" y="212.59" width="135.54" height="406.08" class="map__space" />
+
+								<rect data-space="1.01" x="933.78" y="355.47" width="104.16" height="112.80" class="map__space" />
+
+								<rect data-space="1.01" x="933.78" y="468.27" width="104.16" height="150.40" class="map__space" />
+							</svg>
+							
+							<div class="level__pins">
+								<a class="pin pin--2-1" data-category="2" data-space="2.01" href="#" aria-label="Pin for CAD Room (RM 200)">
+									<span class="pin__icon">
+										<svg class="icon icon--pin"><use xlink:href="#icon-pin"></use></svg>
+									</span>
+								</a>
+								<a class="pin pin--2-2" data-category="2" data-space="2.02" href="#" aria-label="Pin for Visual Techniques (RM 201)">
+									<span class="pin__icon">
+										<svg class="icon icon--pin"><use xlink:href="#icon-pin"></use></svg>
+									</span>
+								</a>
+								<a class="pin pin--2-3" data-category="2" data-space="2.03" href="#" aria-label="Pin for Model Making/Building Tech. (RM 202)">
+									<span class="pin__icon">
+										<svg class="icon icon--pin"><use xlink:href="#icon-pin"></use></svg>
+									</span>
+								</a>
+								<a class="pin pin--2-4" data-category="2" data-space="2.04" href="#" aria-label="Pin for Architecture Lecture Room (RM 203)">
+									<span class="pin__icon">
+										<svg class="icon icon--pin"><use xlink:href="#icon-pin"></use></svg>
+									</span>
+								</a>
+								<a class="pin pin--2-5" data-category="2" data-space="2.05" href="#" aria-label="Pin for CEA Medical Clinic (RM 204)">
+									<span class="pin__icon">
+										<svg class="icon icon--pin"><use xlink:href="#icon-pin"></use></svg>
+									</span>
+								</a>
+								<a class="pin pin--2-6" data-category="2" data-space="2.06" href="#" aria-label="Pin for IE Lecture Room (RM 205)">
+									<span class="pin__icon">
+										<svg class="icon icon--pin"><use xlink:href="#icon-pin"></use></svg>
+									</span>
+								</a>
+								<a class="pin pin--2-7" data-category="2" data-space="2.07" href="#" aria-label="Pin for Mechanical Drafting 3 (RM 206)">
+									<span class="pin__icon">
+										<svg class="icon icon--pin"><use xlink:href="#icon-pin"></use></svg>
+									</span>
+								</a>
+								<a class="pin pin--2-8" data-category="2" data-space="2.08" href="#" aria-label="Pin for Mechanical Drafting 2 (RM 207)">
+									<span class="pin__icon">
+										<svg class="icon icon--pin"><use xlink:href="#icon-pin"></use></svg>
+									</span>
+								</a>
+								<a class="pin pin--2-9" data-category="2" data-space="2.09" href="#" aria-label="Pin for Mechanical Drafting 1 (RM 208)">
+									<span class="pin__icon">
+										<svg class="icon icon--pin"><use xlink:href="#icon-pin"></use></svg>
+									</span>
+								</a>
+								<a class="pin pin--2-10" data-category="2" data-space="2.10" href="#" aria-label="Pin for Manufacturing Lec/Lab Room (RM 209)">
+									<span class="pin__icon">
+										<svg class="icon icon--pin"><use xlink:href="#icon-pin"></use></svg>
+									</span>
+								</a>
+								<a class="pin pin--2-11" data-category="2" data-space="2.11" href="#" aria-label="Pin for Printing/Packaging Lecture/Laboratory Room (RM 210)">
+									<span class="pin__icon">
+										<svg class="icon icon--pin"><use xlink:href="#icon-pin"></use></svg>
+									</span>
+								</a>
+								<a class="pin pin--2-12" data-category="2" data-space="2.12" href="#" aria-label="Pin for Multimedia Room (RM 211)">
+									<span class="pin__icon">
+										<svg class="icon icon--pin"><use xlink:href="#icon-pin"></use></svg>
+									</span>
+								</a>
+								<a class="pin pin--2-13" data-category="2" data-space="2.13" href="#" aria-label="Pin for CAFA Lab Office (RM 212)">
+									<span class="pin__icon">
+										<svg class="icon icon--pin"><use xlink:href="#icon-pin"></use></svg>
+									</span>
+								</a>
+								<a class="pin pin--2-14" data-category="2" data-space="2.14" href="#" aria-label="Pin for Architectural Drafting Room 1 (RM 213)">
+									<span class="pin__icon">
+										<svg class="icon icon--pin"><use xlink:href="#icon-pin"></use></svg>
+									</span>
+								</a>
+								<a class="pin pin--2-15" data-category="2" data-space="2.15" href="#" aria-label="Pin for Architectural Drafting Room 2 (RM 214)">
+									<span class="pin__icon">
+										<svg class="icon icon--pin"><use xlink:href="#icon-pin"></use></svg>
+									</span>
+								</a>
+								<a class="pin pin--2-16" data-category="2" data-space="2.16" href="#" aria-label="Pin for Architectural Drafting Room 3 (RM 215)">
+									<span class="pin__icon">
+										<svg class="icon icon--pin"><use xlink:href="#icon-pin"></use></svg>
+									</span>
+								</a>
+								<a class="pin pin--2-17" data-category="2" data-space="2.17" href="#" aria-label="Pin for Office of the Chairperson - IE (RM 216)">
+									<span class="pin__icon">
+										<svg class="icon icon--pin"><use xlink:href="#icon-pin"></use></svg>
+									</span>
+								</a>
+								<a class="pin pin--2-18" data-category="2" data-space="2.18" href="#" aria-label="Pin for Office of the Chairperson - ME (RM 217)">
+									<span class="pin__icon">
+										<svg class="icon icon--pin"><use xlink:href="#icon-pin"></use></svg>
+									</span>
+								</a>
+								<a class="pin pin--2-19" data-category="2" data-space="2.19" href="#" aria-label="Pin for Office of the Chairperson  - CE (RM 218)">
+									<span class="pin__icon">
+										<svg class="icon icon--pin"><use xlink:href="#icon-pin"></use></svg>
+									</span>
+								</a>
+								<a class="pin pin--2-20" data-category="2" data-space="2.20" href="#" aria-label="Pin for Office of the Chairperson - Archi (RM 219)">
+									<span class="pin__icon">
+										<svg class="icon icon--pin"><use xlink:href="#icon-pin"></use></svg>
+									</span>
+								</a>
+								<a class="pin pin--2-21" data-category="2" data-space="2.21" href="#" aria-label="Pin for Office of the Chairperson - EE (RM 220)">
+									<span class="pin__icon">
+										<svg class="icon icon--pin"><use xlink:href="#icon-pin"></use></svg>
+									</span>
+								</a>
+								<a class="pin pin--2-22" data-category="2" data-space="2.22" href="#" aria-label="Pin for IE Time and Motion Lab (RM 221)">
+									<span class="pin__icon">
+										<svg class="icon icon--pin"><use xlink:href="#icon-pin"></use></svg>
+									</span>
+								</a>
+								<a class="pin pin--2-23" data-category="2" data-space="2.23" href="#" aria-label="Pin for PIIE Office (RM 222)">
+									<span class="pin__icon">
+										<svg class="icon icon--pin"><use xlink:href="#icon-pin"></use></svg>
+									</span>
+								</a>
+
+							</div>
+							<!-- /level__pins -->
+						</div>
+						<div class="level level--3" aria-label="Level 3">
+							<svg class="map map--3" viewBox="0 0 1200 800" width="100%" height="100%" preserveAspectRatio="xMidYMid meet">
+								<title>Map Level 3</title>
+								<rect x="12.72" y="12.59" width="1174.56" height="774.82" class="map__ground" />
+								<rect x="12.72" y="12.59" width="1174.56" height="774.82" class="map__outline"/>
+								<rect data-space="1.01" x="148.26" y="12.59" width="200.8" height="96.75" class="map__space" />
+
+								<rect data-space="1.02" x="349.06" y="12.59" width="75.3" height="96.75" class="map__space" />
+
+								<rect data-space="1.03" x="424.36" y="12.59" width="125.5" height="96.75" class="map__space" />
+
+								<rect data-space="1.04" x="549.86" y="12.59" width="100.4" height="96.75" class="map__space" />
+
+								<rect data-space="3.01" x="650.26" y="12.59" width="75.3" height="96.75" class="map__space" />
+
+								<rect data-space="3.01" x="725.56" y="12.59" width="125.5" height="96.75" class="map__space" />
+
+								<rect data-space="3.01" x="851.06" y="12.59" width="200.8" height="96.75" class="map__space" />
+
+								<!-- Kaliwa -->
+								<rect data-space="3.01" x="12.59" y="74.13" width="100.4" height="580.5" class="map__space" />
+
+								<!-- bottom rooms -->
+								<rect data-space="1.01" x="148.26" y="690.1" width="200.8" height="96.75" class="map__space" />
+
+								<rect data-space="1.01" x="349.06" y="690.1" width="200.8" height="96.75" class="map__space" />
+
+								<rect data-space="1.01" x="549.86" y="690.1" width="100.4" height="96.75" class="map__space" />
+
+								<rect data-space="1.01" x="650.26" y="690.1" width="200.8" height="96.75" class="map__space" />
+
+								<rect data-space="1.01" x="851.06" y="690.1" width="200.8" height="96.75" class="map__space" />
+								<!-- Kanan -->
+								<rect data-space="1.01" x="1085.74" y="514.02" width="100.4" height="193.5" class="map__space" />
+								
+								<rect data-space="1.01" x="1085.74" y="74.13" width="100.4" height="193.5" class="map__space" />
+								<!-- Gitna -->
+
+								<rect data-space="1.01" x="148.26" y="212.59" width="140.56" height="258" class="map__space" />
+
+								<rect data-space="1.01" x="288.82" y="212.59" width="135.54" height="354.75" class="map__space" />
+
+								<rect data-space="1.01" x="424.36" y="212.59" width="90.36" height="161.25" class="map__space" />
+
+								<rect data-space="1.01" x="424.36" y="375" width="90.36" height="193.5" class="map__space" />
+
+								<rect data-space="1.01" x="614.72" y="212.59" width="165.74" height="354.75" class="map__space" />
+
+								<rect data-space="1.01" x="780.46" y="212.59" width="135.54" height="354.75" class="map__space" />
+
+								<rect data-space="1.01" x="916" y="212.59" width="140.56" height="354.75" class="map__space" />
+								
+							</svg>
+							<div class="level__pins">
+								<a class="pin pin--3-1" data-category="3" data-space="3.01" href="#" aria-label="Pin for Micro Computer Lab (RM 300)">
+									<span class="pin__icon">
+										<svg class="icon icon--pin"><use xlink:href="#icon-pin"></use></svg>
+									</span>
+								</a>
+								<a class="pin pin--3-2" data-category="3" data-space="3.02" href="#" aria-label="Pin for Micro Computer Lab Office (RM 301)">
+									<span class="pin__icon">
+										<svg class="icon icon--pin"><use xlink:href="#icon-pin"></use></svg>
+									</span>
+								</a>
+								<a class="pin pin--3-3" data-category="3" data-space="3.03" href="#" aria-label="Pin for Computer Lab Office (RM 302)">
+									<span class="pin__icon">
+										<svg class="icon icon--pin"><use xlink:href="#icon-pin"></use></svg>
+									</span>
+								</a>
+								<a class="pin pin--3-4" data-category="3" data-space="3.04" href="#" aria-label="Pin for Electronics Engineering Lab (RM 303A)">
+									<span class="pin__icon">
+										<svg class="icon icon--pin"><use xlink:href="#icon-pin"></use></svg>
+									</span>
+								</a>
+								<a class="pin pin--3-5" data-category="3" data-space="3.05" href="#" aria-label="Pin for PUP Ham (RM 303B)">
+									<span class="pin__icon">
+										<svg class="icon icon--pin"><use xlink:href="#icon-pin"></use></svg>
+									</span>
+								</a>
+								<a class="pin pin--3-6" data-category="3" data-space="3.06" href="#" aria-label="Pin for Comm. Fundamentals Lab (RM 304A)">
+									<span class="pin__icon">
+										<svg class="icon icon--pin"><use xlink:href="#icon-pin"></use></svg>
+									</span>
+								</a>
+								<a class="pin pin--3-7" data-category="3" data-space="3.07" href="#" aria-label="Pin for Ecess Office (RM 304B)">
+									<span class="pin__icon">
+										<svg class="icon icon--pin"><use xlink:href="#icon-pin"></use></svg>
+									</span>
+								</a>
+								<a class="pin pin--3-8" data-category="3" data-space="3.08" href="#" aria-label="Pin for Communication Eng'g Lab (RM 305A)">
+									<span class="pin__icon">
+										<svg class="icon icon--pin"><use xlink:href="#icon-pin"></use></svg>
+									</span>
+								</a>
+								<a class="pin pin--3-9" data-category="3" data-space="3.09" href="#" aria-label="Pin for Smart Wireless Lab (RM 305B)">
+									<span class="pin__icon">
+										<svg class="icon icon--pin"><use xlink:href="#icon-pin"></use></svg>
+									</span>
+								</a>
+								<a class="pin pin--3-10" data-category="3" data-space="3.10" href="#" aria-label="Pin for Electronics Fundamentals Lab (RM 306A)">
+									<span class="pin__icon">
+										<svg class="icon icon--pin"><use xlink:href="#icon-pin"></use></svg>
+									</span>
+								</a>
+								<a class="pin pin--3-11" data-category="3" data-space="3.11" href="#" aria-label="Pin for RM 306B">
+									<span class="pin__icon">
+										<svg class="icon icon--pin"><use xlink:href="#icon-pin"></use></svg>
+									</span>
+								</a>
+								<a class="pin pin--3-12" data-category="3" data-space="3.12" href="#" aria-label="Pin for CE Computer Room (RM 307)">
+									<span class="pin__icon">
+										<svg class="icon icon--pin"><use xlink:href="#icon-pin"></use></svg>
+									</span>
+								</a>
+								<a class="pin pin--3-13" data-category="3" data-space="3.13" href="#" aria-label="Pin for Automatic Control Lab (RM 308)">
+									<span class="pin__icon">
+										<svg class="icon icon--pin"><use xlink:href="#icon-pin"></use></svg>
+									</span>
+								</a>
+								<a class="pin pin--3-14" data-category="3" data-space="3.14" href="#" aria-label="Pin for RM 309">
+									<span class="pin__icon">
+										<svg class="icon icon--pin"><use xlink:href="#icon-pin"></use></svg>
+									</span>
+								</a>
+								<a class="pin pin--3-15" data-category="3" data-space="3.15" href="#" aria-label="Pin for Personal Computer 1 (RM 310)">
+									<span class="pin__icon">
+										<svg class="icon icon--pin"><use xlink:href="#icon-pin"></use></svg>
+									</span>
+								</a>
+								<a class="pin pin--3-16" data-category="3" data-space="3.16" href="#" aria-label="Pin for Personal Computer 2 (RM 311)">
+								</a>
+								<a class="pin pin--3-17" data-category="3" data-space="3.17" href="#" aria-label="Pin for Personal Computer 3 (RM 312)">
+									<span class="pin__icon">
+										<svg class="icon icon--pin"><use xlink:href="#icon-pin"></use></svg>
+									</span>
+								</a>
+								<a class="pin pin--3-18" data-category="3" data-space="3.18" href="#" aria-label="Pin for Personal Computer 4 (RM 313)">
+									<span class="pin__icon">
+										<svg class="icon icon--pin"><use xlink:href="#icon-pin"></use></svg>
+									</span>
+								</a>
+								<a class="pin pin--3-19" data-category="3" data-space="3.19" href="#" aria-label="Pin for Personal Computer 5 (RM 314)">
+									<span class="pin__icon">
+										<svg class="icon icon--pin"><use xlink:href="#icon-pin"></use></svg>
+									</span>
+								</a>
+								<a class="pin pin--3-20" data-category="3" data-space="3.20" href="#" aria-label="Pin for Personal Computer 6 (RM 315)">
+									<span class="pin__icon">
+										<svg class="icon icon--pin"><use xlink:href="#icon-pin"></use></svg>
+									</span>
+								</a>
+								<a class="pin pin--3-21" data-category="3" data-space="3.21" href="#" aria-label="Pin for Digital Circuit Lab (RM 316)">
+									<span class="pin__icon">
+										<svg class="icon icon--pin"><use xlink:href="#icon-pin"></use></svg>
+									</span>
+								</a>
+								<a class="pin pin--3-22" data-category="3" data-space="3.22" href="#" aria-label="Pin for Materials and Science and Eng'g (RM 318)">
+									<span class="pin__icon">
+										<svg class="icon icon--pin"><use xlink:href="#icon-pin"></use></svg>
+									</span>
+								</a>
+								<a class="pin pin--3-23" data-category="3" data-space="3.23" href="#" aria-label="Pin for CE-RDU (RM 319)">
+									<span class="pin__icon">
+										<svg class="icon icon--pin"><use xlink:href="#icon-pin"></use></svg>
+									</span>
+								</a>
+								<a class="pin pin--3-24" data-category="3" data-space="3.24" href="#" aria-label="Pin for Office of the Chief (RM 320)">
+									<span class="pin__icon">
+										<svg class="icon icon--pin"><use xlink:href="#icon-pin"></use></svg>
+									</span>
+								</a>
+								<a class="pin pin--3-25" data-category="3" data-space="3.25" href="#" aria-label="Pin for Accreditation Center (RM 321)">
+									<span class="pin__icon">
+										<svg class="icon icon--pin"><use xlink:href="#icon-pin"></use></svg>
+									</span>
+								</a>
+								<a class="pin pin--3-26" data-category="3" data-space="3.26" href="#" aria-label="Pin for Office of the Chairperson - ECE (RM 322)">
+									<span class="pin__icon">
+										<svg class="icon icon--pin"><use xlink:href="#icon-pin"></use></svg>
+									</span>
+								</a>
+								<a class="pin pin--3-27" data-category="3" data-space="3.27" href="#" aria-label="Pin for Office of the Chairperson - CoE (RM 323)">
+									<span class="pin__icon">
+										<svg class="icon icon--pin"><use xlink:href="#icon-pin"></use></svg>
+									</span>
+								</a>
+							</div>
+							<!-- /level__pins -->
+						</div>
+						<div class="level level--4" aria-label="Level 4">
+							<svg class="map map--4" viewBox="0 0 1200 800" width="100%" height="100%" preserveAspectRatio="xMidYMid meet">
+								<title>Map Level 4</title>
+								
+								<rect x="12.72" y="12.59" width="1174.56" height="774.82" class="map__ground"  />
+								<rect x="12.72" y="12.59" width="1174.56" height="774.82" class="map__outline" />
+
+								<!-- Room400-->
+								<rect data-space="3.01" x ="1075" y="570" width="110" height="100" class="map__space"  />
+								<!-- Room401-->
+								<rect data-space="3.01" x ="1075" y="460" width="110" height="100" class="map__space"  />
+								<!-- Room402-->
+								<rect data-space="3.01" x ="1075" y="350" width="110" height="100" class="map__space"  />
+								<!-- Room403-->
+								<rect data-space="3.01" x ="1075" y="240" width="110" height="100" class="map__space"  />
+								<!-- Room404-->
+								<!-- Room405-->
+								<!-- Room406-->
+								<!-- Room407-->
+								<!-- Room408-->
+								<!-- Room409-->
+								<!-- Room410-->
+								<rect data-space="3.01" x="12.59" y="74.13" width="100.4" height="580.5" class="map__space"></rect>
+								<!-- Room411-->
+								<!-- Room412-->
+								<!-- Room413-->
+								<!-- Room414-->
+								<!-- Room415-->
+								<!-- Room416-->
+								<!-- Room417-->
+								<!-- Room418-->
+								<!-- Room419-->
+								<!-- Room420-->
+								<!-- Room421-->
+								<!-- Room422-->
+								<!-- Room423-->
+								<!-- Room424-->
+								<!-- Room425-->
+								<!--Open Spaces-->
+								<rect data-space="1.01" x="614.72" y="212.59" width="165.74" height="354.75" class="map__space"></rect>
+								<rect data-space="1.01" x="780.46" y="212.59" width="135.54" height="354.75" class="map__space"></rect>
+								<rect data-space="1.01" x="916" y="212.59" width="140.56" height="354.75" class="map__space"></rect>
+
+								
+								
+							</svg>
+														
+							<div class="level__pins">
+								<a class="pin pin--4-1" data-category="4" data-space="4.01" href="#" aria-label="Pin for Engineering Faculty Center">
+								</a>
+								<a class="pin pin--4-2" data-category="4" data-space="4.02" href="#" aria-label="Pin for Extension Services Involvement and Community">
+								</a>
+								<a class="pin pin--4-3" data-category="4" data-space="4.03" href="#" aria-label="Pin for CEA-SC and Academic Org Monitoring ">
+								</a>
+								<a class="pin pin--4-4" data-category="4" data-space="4.04" href="#" aria-label="Pin for General Physics Lab 2">
+								</a>
+								<a class="pin pin--4-5" data-category="4" data-space="4.05" href="#" aria-label="Pin for General Physics Lab 1">
+								</a>
+								<a class="pin pin--4-6" data-category="4" data-space="4.06" href="#" aria-label="Pin for Lecture Room">
+								</a>
+								<a class="pin pin--4-7" data-category="4" data-space="4.07" href="#" aria-label="Pin for Lecture Room">
+								</a>
+								<a class="pin pin--4-8" data-category="4" data-space="4.08" href="#" aria-label="Pin for Electrical Fundamental Lab">
+								</a>
+								<a class="pin pin--4-9" data-category="4" data-space="4.09" href="#" aria-label="Pin for Electrical Fundamental Lab">
+								</a>
+								<a class="pin pin--4-10" data-category="4" data-space="4.10" href="#" aria-label="Pin for EEN Office">
+								</a>
+								<a class="pin pin--4-11" data-category="4" data-space="4.11" href="#" aria-label="Pin for Library">
+								</a>
+								<a class="pin pin--4-12" data-category="4" data-space="4.12" href="#" aria-label="Pin for CE Lecture Room">
+								</a>
+								<a class="pin pin--4-13" data-category="4" data-space="4.13" href="#" aria-label="Pin for ECE Lecture Room">
+								</a>
+								<a class="pin pin--4-14" data-category="4" data-space="4.14" href="#" aria-label="Pin for CoE Lecture Room">
+								</a>
+								<a class="pin pin--4-15" data-category="4" data-space="4.15" href="#" aria-label="Pin for EE Lecture Room">
+								</a>
+								<a class="pin pin--4-16" data-category="4" data-space="4.16" href="#" aria-label="Pin for IE Lecture Room">
+								</a>
+								<a class="pin pin--4-17" data-category="4" data-space="4.17" href="#" aria-label="Pin for Architecture Lecture Room">
+								</a>
+								<a class="pin pin--4-18" data-category="4" data-space="4.18" href="#" aria-label="Pin for ME Lecture Room">
+								</a>
+								<a class="pin pin--4-19" data-category="4" data-space="4.19" href="#" aria-label="Pin for ME Lecture Room ">
+								</a>
+								<a class="pin pin--4-20" data-category="4" data-space="4.20" href="#" aria-label="Pin for Gen. Chemistry Lab 1">
+								</a>
+								<a class="pin pin--4-21" data-category="4" data-space="4.21" href="#" aria-label="Pin for Gen. Chemistry Lab 2">
+								</a>
+								<a class="pin pin--4-22" data-category="4" data-space="4.22" href="#" aria-label="Pin for NAT'L Science Faculty Room">
+								</a>
+								<a class="pin pin--4-23" data-category="4" data-space="4.23" href="#" aria-label="Pin for Office of the LAB Head">
+								</a>
+								<a class="pin pin--4-24" data-category="4" data-space="4.24" href="#" aria-label="Pin for Spectrum Office">
+								</a>
+								<a class="pin pin--4-25" data-category="4" data-space="4.25" href="#" aria-label="Pin for CoE Library">
+								</a>
+								<a class="pin pin--4-26" data-category="4" data-space="4.26" href="#" aria-label="Pin for Audio Visual Room (AVR)">
+								</a>
+							</div>
+							<!-- /level__pins -->
+						</div>
+					</div>
+					<!-- /levels -->
+				</div>
+				<!-- /mall -->
+				<button class="boxbutton boxbutton--dark open-search" aria-label="Show search"><svg class="icon icon--search"><use xlink:href="#icon-search"></use></svg></button>
+				<nav class="mallnav mallnav--hidden">
+					<button class="boxbutton mallnav__button--up" aria-label="Go up"><svg class="icon icon--angle-down"><use xlink:href="#icon-angle-up"></use></svg></button>
+					<button class="boxbutton boxbutton--dark mallnav__button--all-levels" aria-label="Back to all levels"><svg class="icon icon--stack"><use xlink:href="#icon-stack"></use></svg></button>
+					<button class="boxbutton mallnav__button--down" aria-label="Go down"><svg class="icon icon--angle-down"><use xlink:href="#icon-angle-down"></use></svg></button>
+				</nav>
+				<div class="content">
+					<div class="content__item" data-space="1.01" data-category="1">
+						<h3 class="content__item-title">Power and Steam Lab (RM 100)</h3>
+						<div class="content__item-details">
+							<p class="content__desc">
+								<strong>- SCHEDULE -</strong><br><br><br>
+								<strong>MONDAY</strong><br>1:30PM -  6:30PM : MEEN 30223 (BSME 3-1)<br><br>
+								<strong>TUESDAY</strong><br>7:30AM - 11:30AM : MEEN 30372 (BSME 4-2)<br>
+								12:30PM -  4:30PM : MEEN 30372 (BSME 4-3)<br><br>
+								<strong>WEDNESDAY</strong><br>6:00PM -  9:00PM : MEEN 30372 (BSME 4-4)<br><br>
+								<strong>THURSDAY</strong><br>6:00PM -  9:00PM : MEEN 30372 (BSME 4-1)<br><br>
+								<strong>FRIDAY</strong><br>6:00PM -  9:00PM : MEEN 30372 (BSME 4-1)<br><br>
+								<strong>SATURDAY</strong><br>7:30AM - 10:30AM : MEEN 30213 (BSME 3-3)<br>
+								10:30AM -  1:30PM : MEEN 30213 (BSME 3-4)<br>
+								2:00PM -  5:00PM  : MEEN 30182 (BSME 3-3)<br>
+								5:00PM -  8:00PM  : MEEN 30182 (BSME 3-4)<br>
+							</p>
+						</div>
+					</div>
+					<div class="content__item" data-space="1.02" data-category="1">
+						<h3 class="content__item-title">Welding and Foundry Shop (RM 101)</h3>
+						<div class="content__item-details">
+							<p class="content__desc">
+								<strong>- SCHEDULE -</strong><br><br><br>
+								<strong>MONDAY</strong><br>8:00AM -  9:00AM  - MEEN 30182 (BSME 3-2)<br>
+								9:00AM - 10:00AM  - MEEN 30182 (BSME 3-1)<br>
+								6:00PM -  9:00PM  - MEEN 30203 (BSME 3-3)<br><br>
+								<strong>TUESDAY</strong><br>6:00PM -  9:00PM  - MEEN 30203 (BSME 3-2)<br>
+								<strong>WEDNESDAY</strong><br> 6:00PM -  9:00PM  - MEEN 30203 (BSME 3-4)<br><br>
+								<strong>THURSDAY</strong><br>7:30AM -  1:30PM  - MEEN 30382 (BSME 4-1)<br><br>
+								<strong>FRIDAY</strong><br>7:30AM - 12:00PM  - MEEN 30102 (BSME 4-1)<br>
+								6:00PM -  9:00PM  - MEEN 30203 (BSME 3-1)<br><br>
+								<strong>SATURDAY</strong><br>7:30AM - 10:30AM  - MEEN 30193 (BSME 3-2)<br>
+								2:00PM -  5:00PM  - MEEN 30193 (BSME 3-4)<br>
+								5:00PM -  8:00PM  - MEEN 30193 (BSME 3-1)<br>
+							</p>
+						</div>
+					</div>
+					<div class="content__item" data-space="1.03" data-category="1">
+						<h3 class="content__item-title">Automotive Lab (RM 102)</h3>
+					</div>
+					<div class="content__item" data-space="1.04" data-category="1">
+						<h3 class="content__item-title">Mechanical Design Lab (RM 103)</h3>
+						<div class="content__item-details">
+							<p class="content__desc">
+								<strong>- SCHEDULE -</strong><br><br><br>
+								<strong>MONDAY</strong><br>7:30AM - 9:30AM - MEEN 30372 (BSME 4-2)<br>
+								5:00PM - 7:30PM - MEEN 30404 (BSME 4-4)<br>7:30PM - 9:00PM - MEEN 30242 (BSME 3-1)<br><br>
+								<strong>TUESDAY</strong><br>5:00PM - 7:30PM - MEEN 30404 (BSME 4-3)<br>
+								<strong>WEDNESDAY</strong><br> 7:30PM - 9:00PM - MEEN 30242 (BSME 3-2)<br><br>
+								<strong>THURSDAY</strong><br>7:30PM - 9:00PM - MEEN 30242 (BSME 3-1)<br><br>
+								<strong>FRIDAY</strong><br>7:30AM - 1:30PM - MEEN 30382 (BSME 4-1)<br>
+								7:30PM - 9:00PM - MEEN 30242 (BSME 3-2)<br><br>
+								<strong>SATURDAY</strong><br>7:30AM - 10:30AM - MEEN 30393 (BSME 4-4)<br>\
+								10:30AM - 1:30PM - MEEN 30393 (BSME 4-2)<br>
+								2:00PM - 5:00PM - MEEN 30393 (BSME 4-1)<br>
+								5:00PM - 8:00PM - MEEN 30393 (BSME 4-3)<br>
+							</p>
+						</div>
+					</div>
+					<div class="content__item" data-space="1.05" data-category="1">
+						<h3 class="content__item-title">Plumbing Tech Lab (RM 104)</h3>
+					</div>
+					<div class="content__item" data-space="1.06" data-category="1">
+						<h3 class="content__item-title">Soil Mechanics Lab (RM 105A)</h3>
+					</div>
+					<div class="content__item" data-space="1.07" data-category="1">
+						<h3 class="content__item-title">C.E. Lab Office (RM 105B)</h3>
+					</div>
+					<div class="content__item" data-space="1.08" data-category="1">
+						<h3 class="content__item-title">Material and Testing Lab (RM 106)</h3>
+					</div>
+					<div class="content__item" data-space="1.09" data-category="1">
+						<h3 class="content__item-title">Electrical Power Lab (RM 107)</h3>
+					</div>
+					<div class="content__item" data-space="1.10" data-category="1">
+						<h3 class="content__item-title">Electrical Workshop Lab (RM 108)</h3>
+					</div>
+					<div class="content__item" data-space="1.11" data-category="1">
+						<h3 class="content__item-title">Civil Engineering Tech Lab (RM 109)</h3>
+					</div>
+					<div class="content__item" data-space="1.12" data-category="1">
+						<h3 class="content__item-title">Refrigeration and Air Conditionaing Lab (RM 110)</h3>
+					</div>
+					<div class="content__item" data-space="1.13" data-category="1">
+						<h3 class="content__item-title">Fluid and Hydrualics Lab (RM 111)</h3>
+						<div class="content__item-details">
+							<p class="content__desc">
+								<strong>- SCHEDULE -</strong><br><br><br>
+								<strong>MONDAY</strong><br>1:30PM - 4:30PM - MEEN 30342 (BSME 4-1)<br>
+								5:00PM - 7:30PM - MEEN 30404 (BSME 4-1)<br>7:30PM - 9:00PM - MEEN 30342 (BSME 4-2)<br><br>
+								<strong>TUESDAY</strong><br>7:30AM - 1:30PM - MEEN 30354 (BSME 4-4)<br>1:30PM - 4:30PM - MEEN 30342 (BSME 4-2)<br>7:30PM - 9:00PM - MEEN 30342 (BSME 4-2)<br><br>
+								<strong>WEDNESDAY</strong><br>7:30AM - 1:30PM - MEEN 30354 (BSME 4-3)<br> 1:30PM - 6:30PM - MEEN 30223 (BSME 3-2)<br>7:30PM - 9:00PM - MEEN 30342 (BSME 4-1)<br><br>
+								<strong>THURSDAY</strong><br> 7:30AM - 1:30PM - MEEN 30354 (BSME 4-2)<br>3:00PM - :8:00PM - MEEN 30223 (BSME 3-3)<br>8:00PM - 9:00PM - MEEN 30182 (BSME 3-3)<br><br>
+								<strong>FRIDAY</strong><br>7:30AM - 1:30PM - MEEN 30354 (BSME 4-1)<br>
+								3:00PM - 8:00PM - MEEN 30223 (BSME 3-4)<br>8:00PM - 9:00PM - MEEN 30182 (BSME 3-4)<br><br>
+								<strong>SATURDAY</strong><br>7:30AM - 10:30AM - MEEN 30182 (BSME 3-1)<br>
+								10:30AM - 1:30PM - MEEN 30182 (BSME 3-2)<br>
+								2:00PM - 3:00PM - MEEN 30404 (BSME 4-2)<br>
+								3:00PM - 4:00PM - MEEN 30404 (BSME 4-3)<br>
+								5:00PM - 6:00PM - MEEN 30404 (BSME 4-4)<br>
+								6:00PM - 7:00PM - MEEN 30404 (BSME 4-1)<br>
+								7:00PM - 8:30PM - MEEN 30342 (BSME 4-1)<br>
+							</p>
+						</div>
+					</div>
+					<div class="content__item" data-space="1.14" data-category="1">
+						<h3 class="content__item-title">Thermodynamics Lab (RM 112)</h3>
+						<div class="content__item-details">
+							<p class="content__desc">
+								<strong>- SCHEDULE -</strong><br><br><br>
+								<strong>MONDAY</strong><br>8:00AM - 1:00PM - ECEN 20013 (BSME 2-4)<br>2:00PM - 7:00PM - ECEN 20013 (BSME 2-3)<br>8:00PM - 9:00PM - MEEN 30102 (BSME 2-4)<br><br>
+								<strong>TUESDAY</strong><br>7:30AM - 1:30PM - MEEN 30064 (BSME 2-4)<br>2:00PM - 8:00PM - MEEN 30064 (BSME 2-3)<br><br>
+								<strong>WEDNESDAY</strong><br>7:30AM - 1:30PM - MEEN 30064 (BSME 2-2)<br>2:00PM - 8:00PM - MEEN 30064 (BSME 2-1)<br><br>
+								<strong>THURSDAY</strong><br>7:30AM - 11:30AM - MEEN 30092 (BSME 2-1)<br>12:30PM - 4:30PM - MEEN 30092 (BSME 2-2)<br><br>
+								<strong>FRIDAY</strong><br> 1:30PM - 4:30PM - MEEN 30242 (BSME 3-1)<br><br>
+								<strong>SATURDAY</strong><br>7:30AM - 10:30AM - MEEN 30083 (BSME 2-2)<br>10:30AM - 1:30PM - MEEN 30083 (BSME 2-1)<br>2:00PM - 5:00PM - MEEN 30083 (BSME 2-3)<br>5:00PM - 8:00PM - MEEN 30083 (BSME 2-4)<br><br>
+							</p>
+						</div>
+					</div>
+					<div class="content__item" data-space="1.15" data-category="1">
+						<h3 class="content__item-title">Machine Shop (RM 113)</h3>
+						<div class="content__item-details">
+							<p class="content__desc">
+								<strong>- SCHEDULE -</strong><br><br><br>
+								<strong>TUESDAY</strong><br>7:30AM - 1:30PM - MEEN 30064 (BSME 2-3)<br>2:00PM - 8:00PM - MEEN 30064 (BSME 2-4)<br><br>
+								<strong>WEDNESDAY</strong><br>3:30PM - 6:00PM - MEEN 30404 (BSME 4-3)<br><br>
+								<strong>THURSDAY</strong><br>9:00AM - 12:00PM - MEEN 30064 (BSME 2-2)<br>3:30PM - 6:00PM - MEEN 30404 (BSME 4-2)<br><br>
+								<strong>FRIDAY</strong><br>9:00AM - 12:00PM - MEEN 30064 (BSME 2-1)<br>3:30PM - 6:00PM - MEEN 30404 (BSME 4-1)<br><br>
+								<strong>SATURDAY</strong><br>7:30AM - 10:30AM - MEEN 30064 (BSME 2-1)<br>10:30AM - 1:30PM - MEEN 30064 (BSME 2-2)<br>1:30PM - 4:30PM - MEEN 30102 (BSME 2-4)<br>5:00PM - 9:00PM - MEEN 30102 (BSME 2-4)<br><br>
+							</p>
+						</div>
+					</div>
+					<div class="content__item" data-space="1.16" data-category="1">
+						<h3 class="content__item-title">Dean's office (RM 115)</h3>
+					</div>
+					<div class="content__item" data-space="1.17" data-category="1">
+						<h3 class="content__item-title">Faculty Room (RM 116)</h3>
+					</div>
+					<div class="content__item" data-space="2.01" data-category="2">
+						<h3 class="content__item-title">CAD Room (RM 200)</h3>
+						<div class="content__item-details">
+							<p class="content__desc">
+								<strong>- SCHEDULE -</strong><br><br><br>
+								<strong>MONDAY</strong><br>
+								7:30AM - 11:30AM - ARCH 30274 Arch Des 6 (ARCH 3-1)<br>
+								1:30PM - 4:30PM - ARCH 30163 Arch Des 4 (ARCH 2-2)<br>
+								5:00PM - 9:00PM - ARCH 30163 Arch Des 4 (ARCH 2-5)<br><br>
+								<strong>TUESDAY</strong><br>
+								7:30AM - 11:30AM - ARCH 30163 Arch Des 4 (ARCH 2-2)<br>
+								12:30PM - 3:30PM - ARCH 30163 Arch Des 4 (ARCH 2-2)<br>
+								4:00PM - 9:00PM - ARCH 30183 Bldg Tec 2 (ARCH 2-1)<br><br>
+								<strong>THURSDAY</strong><br>
+								7:30AM - 11:30AM - ARCH 30274 Arch Des 6 (ARCH 3-1)<br>
+								12:30PM - 4:30PM - ARCH 30274 Arch Des 6 (ARCH 4-1)<br>
+								5:00PM - 9:00PM - ARCH 30274 Arch Des 6 (ARCH 4-1)<br><br>
+								<strong>SATURDAY</strong><br>
+								7:30AM - 10:30AM - ARCH 106 Vis Tec 2 (ARCH 1-5)<br>
+								12:30PM - 4:30PM - ARCH 107 Vis Tec 4 (ARCH 1-4)<br><br>
+							</p>
+						</div>
+					</div>
+					<div class="content__item" data-space="2.02" data-category="2">
+						<h3 class="content__item-title">Visual Techniques (RM 201)</h3>
+						<div class="content__item-details">
+							<p class="content__desc">
+								<strong>- SCHEDULE -</strong><br><br><br>
+								<strong>MONDAY</strong><br>
+								8:30AM - 12:30PM - ARCH 30172 HOA 4 (ARCH 2-5)<br><br>
+								<strong>TUESDAY</strong><br>
+								7:30AM - 10:30AM - ARCH 109 TOA 1 (ARCH 1-1)<br>
+								10:30AM - 1:30PM - ARCH 109 TOA 1 (ARCH 1-2)<br><br>
+								<strong>SATURDAY</strong><br>
+								4:30PM - 8:00PM - ARCH 109 TOA 1 (ARCH 1-1)<br><br>
+							</p>
+						</div>
+					</div>
+					<div class="content__item" data-space="2.03" data-category="2">
+						<h3 class="content__item-title">Model Making / Building Tech (RM 202)</h3>
+						<div class="content__item-details">
+							<p class="content__desc">
+								<strong>- SCHEDULE -</strong><br><br><br>
+								<strong>THURSDAY</strong><br>
+								7:30AM - 12:30PM - ARCH 30303 BU3 (ARCH 3-2)<br>
+								12:30PM - 3:30PM - ARCH 30283 PP1 (ARCH 3-1)<br>
+								4:00PM - 9:00PM - ARCH 30303 BU3 (ARCH 3-1)<br><br>
+								<strong>FRIDAY</strong><br>
+								12:30PM-4:30PM -ARCH 108 HOA2 (ARCH 1-4)<br><br>
+								<strong>SATURDAY</strong><br>
+								7:30AM - 11:30PM - ARCH 30172 HOA2 (ARCH 2-1)<br>
+								12:30PM-4:30PM -ARCH 30172 HOA2 (ARCH 2-3)<br><br>
+							</p>
+						</div>
+					</div>
+					<div class="content__item" data-space="2.04" data-category="2">
+						<h3 class="content__item-title">Architecture Lecture Room (RM 203)</h3>
+						<div class="content__item-details">
+							<p class="content__desc">
+								<strong>- SCHEDULE -</strong><br><br><br>
+								<strong>TUESDAY</strong><br>
+								7:30AM - 10:30AM - ARCH 30063 Bldg Tec 1 (ARCH 1-P)<br>
+								11:30AM-3:30PM - ARCH 107 Vis Tec 2 (ARCH 1-P)<br><br>
+								<strong>WEDNESDAY</strong><br>
+								7:30AM - 10:30AM - ARCH 30063 Bldg Tec 1 (ARCH 1-2)<br>
+								1:30PM - 4:30PM - ARCH 30063 Bldg Tec 1 (ARCH 1-1)<br><br>
+								<strong>FRIDAY</strong><br>
+								2:30PM - 5:30PM - ARCH 30283 PP1 (ARCH 3-2)<br><br>
+								<strong>SATURDAY</strong><br>
+								7:30AM - 10:30AM - ARCH 30063 Bldg Tec 1 (ARCH 1-4)<br><br>
+							</p>
+						</div>
+					</div>
+					<div class="content__item" data-space="2.05" data-category="2">
+						<h3 class="content__item-title">CEA Medical Clinic (RM 204)</h3>
+						
+					</div>
+					<div class="content__item" data-space="2.06" data-category="2">
+						<h3 class="content__item-title">IE Lecture Room (RM 205)</h3>
+					</div>
+					<div class="content__item" data-space="2.07" data-category="2">
+						<h3 class="content__item-title">Mechanical Drafting 3 (RM 206)</h3>
+						<div class="content__item-details">
+							<p class="content__desc">
+								<strong>- SCHEDULE -</strong><br><br><br>
+								MONDAY<br>
+								CYCLE A&B 7:30AM - 10:30AM - Calculus 2 (BSCE 1-2)<br>
+								CYCLE A&B 10:30AM - 1:30PM - Engineering Drawing and Plans (BSCE 1-5)<br>
+								CYCLE A&B 1:30PM - 4:30PM - Calculus 2 (BSCE 1-4)<br>
+								CYCLE A&B 4:30PM - 7:30PM - Calculus 2 (BSCE 1-3)<br><br>
+								TUESDAY<br>
+								CYCLE A&B 10:30AM - 1:30PM - Calculus 2 (BSCE 1-5)<br>
+								CYCLE A&B 1:30PM - 4:30PM - Engineering Drawing and Plans (BSCE 1-2)<br>
+								CYCLE A&B 4:30PM - 7:30PM - Engineering Drawing and Plans (BSCE 1-1)<br>
+								CYCLE B 7:30PM - 9:00PM - REM Orientation (BSREM 1-4)<br><br>
+								WEDNESDAY<br>
+								CYCLE A&B 9:30AM - 1:00PM - Hydraulics 2 (BSCE 3-4 & 3-5)<br>
+								CYCLE A&B 1:00PM - 6:00PM - Principles of Reinforced Concrete (BSCE 3-1, 3-3, & 3-4)<br>
+								CYCLE A&B 6:00PM - 9:00PM - Numerical Solutions to CE Problems (BSCE 3-1L)<br><br>
+								THURSDAY<br>
+								CYCLE A&B 7:30AM - 10:30AM - Integrative Course 3 (BSCE 4th Year)<br>
+								CYCLE A&B 10:30AM - 1:30PM - Engineering Drawing and Plans (BSCE 1-4)<br>
+								CYCLE A&B 4:30PM - 7:30PM - Engineering Drawing and Plans (BSCE 1-3)<br><br>
+								FRIDAY<br>
+								CYCLE A&B 4:30PM - 7:30PM - Principles of Steel Design (BSRE 3-1)<br>
+								CYCLE A&B 7:30PM - 9:00PM - Quantity Surveying (BSCE 4-3 SE)<br><br>
+								SATURDAY<br>
+								CYCLE A&B 7:30AM - 10:00AM - Principles of Steel Design (BSRE 3-2)<br>
+								CYCLE A&B 10:00AM - 12:30PM - Principles of Steel Design (BSRE 3-4)<br>
+								CYCLE A&B 12:30PM - 2:30PM - Mechanics of Deformable Bodies (BSRE 2-3)<br>
+								CYCLE A&B 3:00PM - 6:00PM - Civil Engineering Technology (BSCE 1-3)<br>
+								CYCLE A 6:00PM - 9:00PM - Urban & Regional Transpo Planning (BSRE 3-3)<br>
+								CYCLE B 6:00PM - 9:00PM - Railway Transpo Engg (BSRE 3-1)<br>
+							</p>
+						</div>
+					</div>
+					<div class="content__item" data-space="2.08" data-category="2">
+						<h3 class="content__item-title">Mechanical Drafting 2 (RM 207)</h3>
+						<div class="content__item-details">
+							<p class="content__desc">
+								<strong>- SCHEDULE -</strong><br><br><br>
+								MONDAY<br>
+								10:30AM - 1:30PM - Calculus 2 (BSCE 1-1)<br>
+								6:00PM - 9:00PM - Civil Engineering Technology (BSCE 1-5)<br><br>
+								THURSDAY<br>
+								7:30AM - 10:30AM - Interactive Course 3 (BSCE 4th Year)<br>
+								6:00PM - 9:00PM - Mechanics of Deformable Bodies (BSRE 2-2)<br><br>
+								SATURDAY<br>
+								7:30AM-1:30PM - *occupied by other departments<br>
+								1:30PM-4:30PM - Principles of Reinforced Concrete (BSRE 3-4)<br>
+								4:40PM-9:00PM - *occupied by other departments<br><br>
+							</p>
+						</div>
+					</div>
+					<div class="content__item" data-space="2.09" data-category="2">
+						<h3 class="content__item-title">Mechanical Drafting 1 (RM 208)</h3>
+						<div class="content__item-details">
+							<p class="content__desc">
+								<strong>- SCHEDULE -</strong><br><br><br>
+								THURSDAY<br>
+								7:30AM - 10:30AM - Civil Engineering Technology (BSCE 1-2)<br>
+								10:30AM-1:30PM - Civil Engineering Technology (BSCE 1-1)<br>
+								5:00PM-7:00PM - Matrix Analysis of Structures (BSCE 3-2)<br>
+								7:00PM-9:00PM - Matrix Analysis of Structures (BSCE 3-1)<br><br>
+							</p>
+						</div>
+					</div>
+					<div class="content__item" data-space="2.10" data-category="2">
+						<h3 class="content__item-title">Manufacturing Lab/Lec Room (RM 209)</h3>
+						<div class="content__item-details">
+							<p class="content__desc">
+								<strong>- SCHEDULE -</strong><br><br><br>
+								MONDAY<br>
+								10:30AM-1:30PM - WSM 1 (BSIE 2-1) [ Engr. Rodriguez ]<br>
+								1:30PM-4:30PM - OR 2 (BSIE 2-5N) [ Dr. Bongulto ]<br>
+								4:30PM - 7:30PM - Financ Acctng (BSIE 1-4)<br>
+								7:30PM - 9:00PM -  OR 2 (BSIE 3-1) [ Engr. Galang ]<br><br>
+								TUESDAY<br>
+								9:30AM-12:30PM - SCM (BSIE 4-1) [ Engr. Perez ]<br>
+								1:00PM-4:00PM - SCM (BSIE 4-3) [ Engr. Perez ]<br>
+								7:30PM - 9:00PM -  OR 2 (BSIE 3-1) [ Engr. Galang ]<br><br>
+								WEDNESDAY<br>
+								7:30AM - 10:30AM - MAN SYS (BSIE 2-2) [ Engr. Quines ]<br>
+								12:00PM-2:30PM - ELEC 1 (BSIE 3-4) [ Engr. Perez ]<br>
+								3:00PM-5:30PM - SCM (BSIE 4-4)<br>
+								6:00PM - 9:00PM - SCM (BSIE 4-5) [ Engr. Perez ]<br><br>
+								THURSDAY<br>
+								10:30AM-1:30PM - Eng’g Sci (BSIE 2-3) [ Engr. Quines ]<br>
+								1:30PM-4:30PM - ERGO 2 (BSIE 3-5N) [ Dr. Ermita ]<br>
+								7:30PM - 9:00PM -  OR 2 (BSIE 3-3) [ Engr. Galang ]<br><br>
+								FRIDAY<br>
+								10:30AM-1:30PM - OM Lec (BSIE 3-3) [ Engr. Galang ]<br>
+								2:30PM - 4:30PM - IMP (BSIE 1-5N) [ Engr. Rodriguez ]<br>
+								5:00PM - 7:00PM - ERGO (BSIE 3-3) [ Engr. Buluran ]<br>
+								7:30PM - 9:00PM -  OR 2 (BSIE 3-3) [ Engr. Galang ]<br>
+								SATURDAY<br>
+								7:30AM - 11:30AM - Soft App (BSIE 4-4) [ Engr. Bustarga ]<br>
+								11:30PM - 2:30PM - ELEC 3 (BSIE 4-4)<br>
+								2:30PM - 4:30PM - SPD (BSIE 3-4)<br>
+								6:00PM - 9:00PM - STATS 1 (BSIE 1-5N) [ Engr. Rhea ]<br><br>
+							</p>
+						</div>
+					</div>
+					<div class="content__item" data-space="2.11" data-category="2">
+						<h3 class="content__item-title">Printing/ Packaging Lecture Laboratory Room (RM 210)</h3>
+					</div>
+					<div class="content__item" data-space="2.12" data-category="2">
+						<h3 class="content__item-title">Multimedia Room (RM 211)</h3>
+						<div class="content__item-details">
+							<p class="content__desc">
+								<strong>- SCHEDULE -</strong><br><br><br>
+								MONDAY<br>
+								9:00AM - 11:00AM - Fundamental of Surveying 2 (BSCE 2-3)<br>
+								11:00AM - 1:00PM - Fundamental of Surveying 2 (BSCE 2-4)<br><br>
+								TUESDAY<br>
+								9:00AM - 12:00PM - Structural Theory 2 (BSCE 3-5)<br>
+								2:30PM - 4:30PM - Numerical Solutions to Engineering Problems (BSRE 2-2)<br>
+								7:00PM - 9:00PM - Quantity Surveying (BSCE 4-2 GE)<br><br>
+								WEDNESDAY<br>
+								5:00PM - 7:00PM - Dynamics of Rigid Bodies (BSCE 2-3)<br>
+								7:00PM - 9:00PM - Mechanics of Deformable Bodies (BSCE 2-3)<br><br>
+								THURSDAY<br>
+								10:30AM-1:30PM - Hydraulics 2 (BSCE 3-1L)<br>
+								5:00PM - 7:00PM - Dynamics of Rigid Bodies (BSCE 2-1)<br>
+								7:00PM - 9:00PM - Mechanics of Deformable Bodies (BSCE 2-1)<br><br>
+								FRIDAY<br>
+								10:30AM-1:30PM - Fundamentals of Surveying (DRMET 1-1)<br>
+								6:00PM-9:00PM - Mechanics of Deformable Bodies (DCVET 2-2)<br><br>
+								SATURDAY<br>
+								7:30AM - 10:30AM - Principles of Steel Design (BSRE 3-3)<br>
+								10:30AM-1:30PM - Structural Theory 2 (BSCE 3-3)<br>
+								1:30PM-4:30PM - Structural Theory 2 (BSCE 3-2)<br>
+								5:00PM - 7:00PM - Dynamics of Rigid Bodies (BSCE 2-1)<br>
+								7:00PM - 9:00PM -  Dynamics of Rigid Bodies (BSCE 2-2)<br><br>
+							</p>
+						</div>
+					</div>
+					<div class="content__item" data-space="2.13" data-category="2">
+						<h3 class="content__item-title">CAFA Lab Office (RM 212A)</h3>
+						<div class="content__item-details">
+							<p class="content__desc">
+								<strong>- SCHEDULE -</strong><br><br><br>
+								TUESDAY<br>
+								11:30AM - 3:30PM - ARCH 30202  CADD 1 (ARCH 2-1)<br>
+								4:30PM - 8:30PM - ARCH 30202  CADD 1 (ARCH 2-3)<br><br>
+								FRIDAY<br>
+								9:30AM - 12:30PM - ARCH 3223  CADD 1 (ARCH 4-T)<br>
+								3:30PM - 7:30PM - ARCH 30202  CADD 1 (ARCH 2-2)<br><br>
+								SATURDAY<br>
+								12:30PM - 4:30PM - ARCH 30202  CADD 1 (ARCH 2-4)<br>
+								5:00PM - 9:00PM - ARCH 30202  CADD 1 (ARCH 2-5)<br><br>
+								SUNDAY<br>
+								2:30PM - 6:30PM - ARCH 3223  CADD 1 (ARCH 4-T)<br><br>
+							</p>
+						</div>
+					</div>
+					<div class="content__item" data-space="2.14" data-category="2">
+						<h3 class="content__item-title">RM 212B</h3>
+					</div>
+					<div class="content__item" data-space="2.15" data-category="2">
+						<h3 class="content__item-title">Architectural Drafting 1 (RM 213)</h3>
+						<div class="content__item-details">
+							<p class="content__desc">
+								<strong>- SCHEDULE -</strong><br><br><br>
+								MONDAY<br>
+								7:30AM - 12:30PM - ARCH 30365  Ar Des 8 (ARCH 4-1)<br>
+								2:30PM - 8:30PM - ARCH 30274  Ar Des 6 (ARCH 3-1)<br><br>
+								TUESDAY<br>
+								9:30AM - 2:30PM - ARCH 30183  Bldg Tech 2 (ARCH 2-3)<br>
+								3:30PM - 8:30PM - ARCH 30183  Bldg Tech 2 (ARCH 2-4)<br><br>
+								WEDNESDAY<br>
+								8:30AM - 12:30PM - ARCH 105  Ar Des 2 (ARCH 1-1)<br>
+								12:30PM - 3:30PM - ARCH 30365  Ar Des 8 (ARCH 4-2)<br>
+								4:30PM - 7:30PM - ARCH 30274  Ar Des 6 (ARCH 3-3)<br><br>
+								THURSDAY<br>
+								2:30PM - 7:30PM - ARCH 30293  Bldg Tech 4 (ARCH 3-2)<br><br>
+								FRIDAY<br>
+								7:30AM - 8:30PM - ARCH 30274  Ar Des 6 (ARCH 3-2)<br><br>
+								SATURDAY<br>
+								7:30AM - 11:30AM - ARCH 106 Grphc 2 (ARCH 1-P)<br>
+								12:30PM - 3:30PM - ARCH 106 Grphc 2 (ARCH 1-P)<br><br>
+							</p>
+						</div>
+					</div>
+					<div class="content__item" data-space="2.16" data-category="2">
+						<h3 class="content__item-title">Architectural Drafting 2 (RM 214)</h3>
+						<div class="content__item-details">
+							<p class="content__desc">
+								<strong>- SCHEDULE -</strong><br><br><br>
+								MONDAY<br>
+								7:30AM - 1:30PM - ARCH 30274  Ar Des 6 (ARCH 3-3)<br>
+								2:30PM - 8:30PM - ARCH 30365  Ar Des 8 (ARCH 4-2)<br><br>
+								TUESDAY<br>
+								7:30AM - 1:30PM - ARCH 30274  Ar Des 6 (ARCH 3-4)<br>
+								2:30PM - 4:30PM - ARCH 30274  Ar Des 6 (ARCH 3-4)<br><br>
+								WEDNESDAY<br>
+								7:30AM - 11:30AM - ARCH 106 Grphc 2 (ARCH 1-5)<br>
+								12:30PM - 4:30PM - ARCH 106 Grphc 2 (ARCH 1-3)<br>
+								5:00PM - 8:00PM - ARCH 106 Grphc 2 (ARCH 1-3)<br><br>
+								FRIDAY<br>
+								7:30AM - 11:30AM - ARCH 105  Ar Des 2 (ARCH 1-4)<br>
+								12:30PM - 4:30PM - ARCH 105  Ar Des 2 (ARCH 1-PET)<br><br>
+								SATURDAY<br>
+								7:30AM - 11:30AM - ARCH 30163 Ar Des 4 (ARCH 2-4)<br>
+								12:30PM - 3:30PM - ARCH 30163 Ar Des 4 (ARCH 2-1)<br>
+								4:00PM - 8:00PM - ARCH 30163 Ar Des 4 (ARCH 2-1)<br><br>
+							</p>
+						</div>
+					</div>
+					<div class="content__item" data-space="2.17" data-category="2">
+						<h3 class="content__item-title">Architectural Drafting 3 (RM 215)</h3>
+						<div class="content__item-details">
+							<p class="content__desc">
+								<strong>- SCHEDULE -</strong><br><br><br>
+								MONDAY<br>
+								10:30AM - 1:30PM - ARCH 106 Grphc 2 (ARCH 1-4)<br>
+								2:30PM - 6:30PM - ARCH 106 Grphc 2 (ARCH 1-4)<br><br>
+								WEDNESDAY<br>
+								10:30AM - 1:30PM - ARCH 106 Grphc 2 (ARCH 1-2)<br>
+								2:30PM - 6:30PM - ARCH 106 Grphc 2 (ARCH 1-2)<br><br>
+								FRIDAY<br>
+								10:30AM - 1:30PM - ARCH 106 Grphc 2 (ARCH 1-5)<br>
+								2:30PM - 6:30PM - ARCH 106 Grphc 2 (ARCH 1-5)<br><br>
+								SATURDAY<br>
+								7:30AM - 11:30AM - ARCH 30163 Ar Des 4 (ARCH 2-3)<br><br>
+							</p>
+						</div>
+					</div>
+					<div class="content__item" data-space="2.18" data-category="2">
+						<h3 class="content__item-title">Office of the Chairperson - IE (RM 216)</h3>
+					</div>
+					<div class="content__item" data-space="2.19" data-category="2">
+						<h3 class="content__item-title">Office of the Chairperson - ME (RM 217)</h3>
+					</div>
+					<div class="content__item" data-space="2.20" data-category="2">
+						<h3 class="content__item-title">Office of the Chairperson  - CE (RM 218)</h3>
+					</div>
+					<div class="content__item" data-space="2.21" data-category="2">
+						<h3 class="content__item-title">Office of the Chairperson  - ARCHI (RM 219)</h3>
+					</div>
+					<div class="content__item" data-space="2.22" data-category="2">
+						<h3 class="content__item-title">Office of the Chairperson - EE (RM 220)</h3>
+					</div>
+					<div class="content__item" data-space="2.23" data-category="2">
+						<h3 class="content__item-title">IE Time and Motion Lab (RM 221)</h3>
+					</div>
+					<div class="content__item" data-space="3.01" data-category="3">
+						<h3 class="content__item-title">Micro Computer Lab (RM 300)</h3>
+						<div class="content__item-details">
+							<p class="content__desc">
+								<strong>- SCHEDULE -</strong><br><br><br>
+								MONDAY<br>
+								BSCpE 3-5  8:30am - 10:30am - CMPE 40193 Enterprise Software Sys [ Engr. J.Tena]<br>
+								BSCpE 3-5  10:30am - 1:30pm - CMPE 40193 Enterprise Software Sys [ Engr. J.Tena]<br>
+								BSCpE 2-5  1:30pm - 4:30pm - CMPE 30074 Software Design [ Engr. J.Lorico]<br>
+								BSCpE 2-5  4:30pm - 7:30pm - CMPE 30074 Software Design [ Engr. J.Lorico]<br>
+								BSCpE 3-3  7:30pm - 9:00pm - CMPE 30074 Software Design [ Engr. R.Ado]<br><br>
+								TUESDAY<br>
+								BSCpE 4-6  9:00am - 11:00am - CMPE 30274 Embedded Systems [ Engr. C.Nicomedes]<br>
+								BSCpE 4-6  12:00pm - 2:00pm - CMPE 40143 Trends in Software Development[ Engr. A. Dela Cruz]<br>
+								BSCpE 4-6  2:30pm - 4:30pm - CMPE 40143 Trends in Software Development[ Engr. A. Dela Cruz]<br>
+								BSCpE 3-1  4:30pm - 7:30pm - CMPE 40113 CPE-ELEC1 [ Engr. F. Chin]<br>
+								BSCpE 3-1  7:30pm - 9:00pm - CMPE 40113 CPE-ELEC1 [ Engr. A. Dela Cruz]<br><br>
+								WEDNESDAY<br>
+								BSCpE 4-3  10:30am - 1:30pm - CMPE 30274 Embedded Systems [ Engr. J. Manarang]<br>
+								BSCpE 4-3  1:30pm - 4:30pm - CMPE 40042 Mobile Development [ Engr.F. Chin]<br>
+								BSCpE 4-3  4:30pm - 7:30pm - CMPE 40042 Mobile Development [ Engr.F. Chin]<br>
+								BSCpE 3-1  7:30pm - 9:00pm - CMPE 30193 MOR [ Engr. A. Dela Druz]<br><br>
+								THURSDAY<br>
+								BSCpE 3-3  10:30am -1:30pm - CMPE 30163 Occupational Health & Safety   [ Engr. A. Velasco]<br>
+								BSCpE 1-3  3:00pm -6:009pm - CMPE 3184 Microprocessor [ Engr. F. Chin]<br>
+								BSCpE 3-3  6:00pm -9:00pm - CMPE 105 Computer Hardware   [ Engr. A. Orioque]<br><br>
+								FRIDAY<br>
+								BSCpE 2-2  7:30am -10:30am - CMPE 40042 Mobile Development   [-]<br>
+								BSCpE 3-4  10:30am -1:30pm - CMPE 30193 MOR [ Engr. J. Cansino]<br>
+								BSCpE 3-2  1:30pm -4:30pm - CMPE 20103 TECHNO [ Engr. A. Velasco]<br>
+								BSCpE 3-3  5:00pm -7:00pm - CMPE 30202 CPE LAWS [ Engr. A. Velasco]<br>
+								BSCpE 3-2  7:00pm -9:00pm - CMPE 30193 CPE LAWS [ Engr. A. Velasco]<br><br>
+								SATURDAY<br>
+								BSCpE 3-6  7:30am -10:30am - CMPE 20103 TECHNO [ Engr. P. Tenerife]<br>
+								BSCpE 3-2  10:30am -1:30pm - CMPE 20103 TECHNO [ Engr. P. Tenerife]<br>
+								BSCpE 3-2  2:00pm -6:00pm - CMPE 40153 INTRO TO BIG DATA [ Engr. E. Artificio]<br>
+								BSCpE 4-5  6:00pm -9:00pm - CMPE 30283 EMERGING TECH [ Engr. E. Artificio]<br><br>
+							</p>
+						</div>
+					</div>
+					<div class="content__item" data-space="3.02" data-category="3">
+						<h3 class="content__item-title">Micro Computer Lab Office (RM 301)</h3>
+						<div class="content__item-details">
+							<p class="content__desc">
+								<strong>- SCHEDULE -</strong><br><br><br>
+							</p>
+						</div>
+					</div>
+					<div class="content__item" data-space="3.03" data-category="3">
+						<h3 class="content__item-title">Computer Lab Office (RM 302)</h3>
+						<div class="content__item-details">
+							<p class="content__desc">
+								<strong>- SCHEDULE -</strong><br><br><br>
+								MONDAY<br>
+								NA  7:30am - 9:00pm - ECE [-]<br><br>
+								TUESDAY<br>
+								BSCpE 1-3  10:30am - 1:30pm - MATH 103 Calculus 2 [-]<br>
+								BSCpE 2-4  1:30pm - 4:30pm - CMPE 30043 NUMERICAL METHODS [Engr. J. Rodriguez]<br>
+								BSCpE 1-1  4:30pm - 7:30pm - MATH 103 Calculus 2 [-]<br>
+								BSCpE 4-4  7:30pm - 9:00pm - CMPE 30283 EMERGING TECH  [ Engr. J.Manabang]<br><br>
+								WEDNESDAY<br>
+								NA  7:30am - 9:00pm - ECE [-]<br><br>
+								THURSDAY<br>
+								BSCpE 2-6  7:30am -10:30am - ECEN 20034 ELECTRONICS  [ Engr. R. Fernando]<br>
+								BSCpE 2-3  10:30am -1:30pm - ECEN 20034 ELECTRONICS  [ Engr. R. Fernando]<br>
+								BSCpE 3-4  1:30pm -4:30pm - CMPE 40073 NETWORK ADMIN [ Engr. A.Canlas]<br>
+								BSCpE 4-4  7:30pm - 9:00pm - CMPE 30283 EMERGING TECH  [ Engr. J.Manabang]<br><br>
+								FRIDAY<br>
+								NA  7:30am - 9:00pm - ECE [-]<br><br>
+								SATURDAY<br>
+								BSCpE 4-1  7:30am -10:30am - CMPE 30274 EMBEDDED SYSTEMS [ Engr. J. Avila]<br>
+								BSCpE 4-5  10:30am -1:30pm - CMPE 30274 EMBEDDED SYSTEMS [ Engr. C. Nicomedes]<br>
+								BSCpE 6-5  1:30pm -4:30pm - CMPE 30274 EMBEDDED SYSTEMS [ Engr. C. Nicomedes]<br>
+								BSCpE 4-5  5:00pm -9:00pm - CMPE 30274 EMBEDDED SYSTEMS [ Engr. C. Nicomedes]<br><br>
+							</p>
+						</div>
+					</div>
+					<div class="content__item" data-space="3.04" data-category="3">
+						<h3 class="content__item-title">Electronics Engineering Lab (RM 303A)</h3>
+						<div class="content__item-details">
+							<p class="content__desc">
+								<strong>- SCHEDULE -</strong><br><br><br>
+								TUESDAY<br>
+								ECE 2-2  10:30am - 1:30pm - Electronics Circuit Analysis and Design [Engr. Noriega]<br>
+								ECE 2-4  1:30pm - 4:30pm - Electronics Circuit Analysis and Design [Engr. Noriega]<br><br>
+								SATURDAY<br>
+								ECE 1-2P  7:30am - 10:30am - ECE Math [Engr.Reyes]<br>
+								ECE 1-1P  10:30am - 1:30pm - ECE Math [Engr. Reyes]<br>
+								ECE 4-2  2:00pm - 4:00pm - Elective 4 (Advance Communication System and Design [Engr.Tan]<br>
+								ECE 3-3  4:00pm - 6:00pm - Transmission Media and Antenna System & Design [Engr. Enoval]<br>
+								ECE 3-2  6:00pm - 8:00pm - Transmission Media and Antenna System & Design [Engr. Enoval]<br><br>
+							</p>
+						</div>
+					</div>
+					<div class="content__item" data-space="3.05" data-category="3">
+						<h3 class="content__item-title">PUP Ham (RM 303B)</h3>
+						<div class="content__item-details">
+							<p class="content__desc">
+								<strong>- SCHEDULE -</strong><br><br><br>
+								WEDNESDAY<br>
+								ECE 2-1  10:30am - 1:30pm - ECE Math [Engr. Carrascal]<br>
+								ECE 2-3  10:30am - 1:30pm - ECE Math [Engr. Carrascal]<br><br>
+								SATURDAY<br>
+								ECE 3-3  7:30am - 9:30am - Data Communications [Engr. De Vera]<br>
+								ECE 3-2  9:30am - 11:30am - Data Communications [Engr. De Vera]<br>
+								ECE 3-2  11:30am - 1:30pm - Data Communications [Engr. De Vera]<br>
+								ECE 3-2  2:00pm - 4:00pm - Data Communications [Engr. De Vera]<br>
+								ECE 3-2  4:00pm - 6:00pm - Data Communications [Engr. De Vera]<br><br>
+							</p>
+						</div>
+					</div>
+					<div class="content__item" data-space="3.06" data-category="3">
+						<h3 class="content__item-title">Comm. Fundamentals Lab (RM 304A)</h3>
+						<div class="content__item-details">
+							<p class="content__desc">
+								<strong>- SCHEDULE -</strong><br><br><br>
+								MONDAY<br>
+								ECE 3-3  7:30am - 10:30am - ECE Laws, Contracts, Ethics, Safety and Standards [Engr.Publico]<br>
+								ECE 2-5  1:30pm - 4:30pm - Electronics Circuits Analysis and Design [Engr.Noriega]<br><br>
+								TUESDAY<br>
+								ECE 4-2  7:30am - 10:30am - Integrative Course 2 [Engr.Miranda]<br>
+								ECE 4-4  10:30am - 1:30pm - Integrative Course 2 [Engr.Miranda]<br>
+								ECE 1-1  1:30pm - 4:30pm - Basic Electronics 2 [Engr.Bayani]<br><br>
+								WEDNESDAY<br>
+								ECE 4-5  10:30am - 1:30pm - Elective 5 (Renewable Energy) [Engr.Tuboia]<br>
+								ECE 2-3  10:30am - 1:30pm - Electronics Circuits Analysis and Design [Engr. Noriega]<br>
+								ECE 2-1  1:30pm - 4:30pm - Electronics Circuits Analysis and Design [Engr.Noriega]<br><br>
+								THURSDAY<br>
+								ECE 1-5  10:30am - 1:30pm - Basic Electronics 2 [Engr.Bayani]<br><br>
+								FRIDAY<br>
+								ECE 1-3  70:30am - 10:30am - Basic Electronics 2 [Engr.Bayani]<br>
+								SATURDAY<br>
+								ECE 4-3  7:30am - 10:30am - Elective 4 (Broadcast Engineering) [Engr.Lazana]<br>
+								ECE 4-5  10:30am - 1:30pm - Elective 4 (Broadcast Engineering) [Engr.Lazana]<br>
+								ECE 4-1  2:00pm - 5:00pm - Elective 4 (Broadcast Engineering) [Engr.Lazana]<br>
+								ECE 4-4  5:00pm - 7:00pm - Elective 4 (Advanced Communication System and Design) [Engr.Tan]<br><br>
+							</p>
+						</div>
+					</div>
+					<div class="content__item" data-space="3.07" data-category="3">
+						<h3 class="content__item-title">Ecess Office (RM 304B)</h3>
+						<div class="content__item-details">
+							<p class="content__desc">
+								<strong>- SCHEDULE -</strong><br><br><br>
+							</p>
+						</div>
+					</div>
+					<div class="content__item" data-space="3.08" data-category="3">
+						<h3 class="content__item-title">Communication Eng'g Lab (RM 305A)</h3>
+						<div class="content__item-details">
+							<p class="content__desc">
+								<strong>- SCHEDULE -</strong><br><br><br>
+								MONDAY<br>
+								ECE 4-1  7:30am - 10:30am - Elective 6 (Robotics Technology) [Engr.Rosales]<br>
+								ECE 3-4  10:30am - 1:30pm - Transportation Media and Antenna Systems & Design [Engr.Rosales]<br>
+								ECE 4-3  2:00pm - 5:00pm - Elective 6 (Robotics Technology) [Engr.Rosales]<br><br>
+								TUESDAY<br>
+								ECE 4-4  7:30am - 10:30am - Emerging Technologies [Engr.Rosales]<br>
+								ECE 3-5  10:30am - 1:30pm - Transportation Media and Antenna Systems & Design [Engr.Rosales]<br>
+								ECE 4-2  2:00pm - 3:30pm - Technopreneuership 101  [Engr.Andres]<br>
+								ECE 4-4  3:30pm - 5:00pm - Technopreneuership 101  [Engr.Andres]<br><br>
+								WEDNESDAY<br>
+								ECE 3-5  10:30am - 1:30pm - ECE Laws, Contracts, Ethics, Safety, and Standards [Engr. Salvador]<br>
+								ECE 4-3  2:00pm - 5:00pm - Elective 6 (Robotics Technology) [Engr.Rosales]<br>
+								ECE 3-5  5:30pm - 8:30pm - Elective 6 (Robotics Technology) [Engr.Rosales]<br><br>
+								SATURDAY<br>
+								ECE 3-4  7:30am - 10:30pm - ECE Laws, Contracts, Ethics, Safety, and Standards [Engr. Publico]<br>
+								ECE 3-1  10:30am - 1:30pm - Transportation Media and Antenna Systems & Design [Engr.Tan]<br>
+								ECE 4-3  2:00pm - 5:00pm - Integrative Course 2  [Engr.Umongan]<br>
+								ECE 4-1  5:30pm -8:30pm - Integrative Course 2  [Engr.Umongan]<br><br>
+							</p>
+						</div>
+					</div>
+					<div class="content__item" data-space="3.09" data-category="3">
+						<h3 class="content__item-title">Smart Wireless Lab (RM 305B)</h3>
+						<div class="content__item-details">
+							<p class="content__desc">
+								<strong>- SCHEDULE -</strong><br><br><br>
+							</p>
+						</div>
+					</div>
+					<div class="content__item" data-space="3.10" data-category="3">
+						<h3 class="content__item-title">Electronics Fundamentals Lab (RM 306A)</h3>
+						<div class="content__item-details">
+							<p class="content__desc">
+								<strong>- SCHEDULE -</strong><br><br><br>
+								MONDAY<br>
+								ECE 2-1  7:30am - 10:30am - Principles of Communication Systems [Engr.Magsumbol]<br>
+								ECE 4-1  10:30am - 1:30pm - Integrative Course 2 [Engr.Miranda]<br><br>
+								TUESDAY<br>
+								ECE 1-3  7:30am - 10:30am - Basic Electronics 2 [Engr.Cabrera]<br>
+								ECE 3-2  10:30am - 1:30pm - ECE Laws, Contracts, Ethics, Safety, and Standards [Dr.Gallego]<br>
+								ECE 3-1  1:30pm - 4:30pm - ECE Laws, Contracts, Ethics, Safety, and Standards [Dr.Gallego]<br>
+								ECE 1-2  5:00pm - 8:00pm - Material Science and Engineering  [Dr.Gallego]<br><br>
+								WEDNESDAY<br>
+								ECE 4-1  10:30am - 1:30pm - Elective 6 (Robotics Technology) [Engr.Rosales]<br>
+								ECE 1-1  2:00pm - 5:00pm - Material Science and Engineering [Dr.Gallego]<br>
+								ECE 4-1  5:00pm - 8:00pm - Elective 5 (Biomedical) [Dr.Gallego]<br><br>
+								FRIDAY<br>
+								ECE 1-3  10:30am - 1:30pm - Material Science and Engineering [Dr.Gallego]<br>
+								ECE 1-5  1:30pm - 4:30pm - Material Science and Engineering [Dr.Gallego]<br>
+								ECE 1-4  5:00pm - 8:00pm - Material Science and Engineering [Dr.Gallego]<br><br>
+								SATURDAY<br>
+								ECE 1-1P  7:30am - 9:30am - Digital 2: Microprocessor [Engr.Calderon]<br>
+								ECE 3-5  9:30am - 11:30am - Digital 2: Microprocessor [Engr.Calderon]<br>
+								ECE 3-2  11:30am - 1:30pm - Digital 2: Microprocessor [Engr.Calderon]<br>
+								ECE 3-3  2:00pm - 4:00pm - Digital 2: Microprocessor [Engr.Calderon]<br>
+								ECE 3-1  4:00pm - 6:00pm - Digital 2: Microprocessor [Engr.Calderon]<br>
+								ECE 3-4  6:00pm - 8:00pm - Digital 2: Microprocessor [Engr.Calderon]<br><br>
+							</p>
+						</div>
+					</div>
+					<div class="content__item" data-space="3.11" data-category="3">
+						<h3 class="content__item-title">RM 306B</h3>
+						<div class="content__item-details">
+							<p class="content__desc">
+								<strong>- SCHEDULE -</strong><br><br><br>
+								MONDAY<br>
+								ECE 2-2  2:30pm - 5:30pm - Principles of Communication Systems [Engr.Magsumbol]<br>
+								ECE 4-1  10:30am - 1:30pm - Integrative Course 2 [Engr.Miranda]<br><br>
+								TUESDAY<br>
+								ECE 2-2  7:30am - 10:30am - Principles of Communication Systems [Engr.Magsumbol]<br>
+								ECE 4-2  10:30am - 1:30pm - Emerging Technologies [Engr.Magsumbol]<br>
+								ECE 3-4  2:00pm - 5:00pm - Transmission Media and Antenna System & Design [Dr.Rosales]<br><br>
+								WEDNESDAY<br>
+								ECE 4-3  8:30am - 11:30am - Integrative Course 2 [Engr.Miranda]<br>
+								ECE 4-5  1:30pm - 4:30pm - Integrative Course 2 [Engr.Miranda]<br><br>
+								THURSDAY<br>
+								ECE 2-3  1:30pm - 4:30pm - Circuits 2 [Engr.Mutuc]<br>
+								ECE 2-4  5:00pm - 8:00pm - Circuits 2 [Engr.Mutuc]<br><br>
+								FRIDAY<br>
+								ECE 2-1  7:30am - 10:30am - Principles of Communicating Systems [Engr.Magsumbol]<br>
+								ECE 2-2  10:30am - 1:30pm - Principles of Communicating Systems [Engr.Magsumbol]<br><br>
+								SATURDAY<br>
+								ECE 3-1  7:30am - 9:30am - Feedback and Control Systems [Engr.Magsumbol]<br>
+								ECE 3-3  9:30am - 11:30am - Feedback and Control Systems [Engr.Quinones]<br>
+								ECE 4-4  11:30am - 1:30pm - Feedback and Control Systems [Engr.Quinones]<br>
+								ECE 3-4  2:00pm - 4:00pm - Feedback and Control Systems [Engr.Quinones]<br>
+								ECE 4-5  4:00pm - 6:00pm - Elective 5 (Adherence Power Supply System) [Engr.Quinones]<br><br>
+							</p>
+						</div>
+					</div>
+					<div class="content__item" data-space="3.12" data-category="3">
+						<h3 class="content__item-title">CE Computer Room(RM 307)</h3>
+						<div class="content__item-details">
+							<p class="content__desc">
+								<strong>- SCHEDULE -</strong><br><br><br>
+							</p>
+						</div>
+					</div>
+					<div class="content__item" data-space="3.13" data-category="3">
+						<h3 class="content__item-title">Automatic Control Lab (RM 308)</h3>
+						<div class="content__item-details">
+							<p class="content__desc">
+								<strong>- SCHEDULE -</strong><br><br><br>
+								MONDAY<br>
+								ECE 2-1  7:30am - 10:30am - Electrical Circuits 2 [Engr.Faustino]<br>
+								ECE 2-2  10:30am - 1:30pm - Electrical Circuits 2 [Engr.Faustino]<br>
+								ECE 5-3  1:30pm - 4:30pm - Research Project 2 [Engr.Durias]<br><br>
+								TUESDAY<br>
+								ECE 2-3  7:30am - 10:30am - Electrical Circuits 2 [Engr. Peneyra]<br>
+								ECE 2-4  10:30am - 1:30pm - Electrical Circuits 2 [Engr. Peneyra]<br><br>
+								THURSDAY<br>
+								ECE 2-1  7:30am - 10:30am - Electrical Circuits 2 [Engr. Faustino]<br>
+								ECE 2-2  10:30am - 1:30pm - Electrical Circuits 2 [Engr.Faustino]<br>
+								ECE 5-1 6:00pm - 9:00pm - Summation Course [Engr.Peneyra]<br><br>
+								FRIDAY<br>
+								ECE 2-3  7:30am - 10:30am - Electrical Circuits 2 [Engr. Peneyra]<br>
+								ECE 2-4  10:30am - 1:30pm - Electrical Circuits 2 [Engr.Peneyra]<br>
+								ECE 5-3  2:00pm - 4:00pm - Summation Course [Engr.Peneyra]<br>
+								ECE 1-5  6:00pm - 9:00pm - Computer Programming [Engr.Peneyra]<br><br>
+								SATURDAY<br>
+								ECE 2-4  7:30am - 10:30am - Electronic Circuits and Devices and Analysis [-]<br>
+								ECE 3-3  10:30am - 1:30pm - Engineering Math for EE [Engr.Rodriguez]<br>
+								ECE 5-4  2:30pm - 5:30pm - Elective 3 [-]<br><br>
+							</p>
+						</div>
+					</div>
+					<div class="content__item" data-space="3.14" data-category="3">
+						<h3 class="content__item-title">RM 309</h3>
+						<div class="content__item-details">
+							<p class="content__desc">
+								<strong>- SCHEDULE -</strong><br><br><br>
+							</p>
+						</div>
+					</div>
+					<div class="content__item" data-space="3.15" data-category="3">
+						<h3 class="content__item-title">Personal Computer 1 (RM 310)</h3>
+						<div class="content__item-details">
+							<p class="content__desc">
+								<strong>- SCHEDULE -</strong><br><br><br>
+								MONDAY<br>
+								BSCpE 1-1P 11:00am - 2:00pm - CMPE 30174 Computer Networks [Engr .J. Binuya]<br>
+								BSCpE 1-1P  3:00pm - 6:00pm - CMPE 30174 Computer Networks [Engr. J. Binuya]<br>
+								BSEE 3-2  6:00pm 9:00pm - CMPE 20093 Micro [Engr. R. Mahaguay]<br><br>
+								TUESDAY<br>
+								BSCpE 1-3 7:30am - 10:30am - STAT 012 Engineering Data Analysis<br>
+								BSCpE 3-3 12:00nn - 2:00pm - CMPE 40073 Network Admin [Engr. J. Binuya]<br>
+								BSCpE 3-3  3:00pm - 6:00pm - CMPE 40073 Network Admin [Engr. J. Binuya]<br>
+								BSCpE 1-2P  6:00pm 9:00pm - CMPE 40213 Software Process [Engr. M. Legarde]<br><br>
+								WEDNESDAY<br>
+								BSCpE 3-4 11:00am - 2:00pm - CMPE 30184 Micropro [Engr. R. Mahaguay]<br>
+								BSCpE 3-4  3:00pm - 6:00pm - CMPE 30184 Micropro [Engr. R. Mahaguay]<br>
+								BSEE 2-2  6:00pm 9:00pm - CMPE 30074 Software Design[Engr. J. Lorico]<br><br>
+								THURSDAY<br>
+								BSCpE 1-4 7:30am - 10:30am - MATH 103 Calculus 2<br>
+								BSCpE 2-5 12:00nn - 3:00pm -  ENSC 20011 Computer Aided Drafting<br>
+								BSCpE 2-6 3:00pm - 6:00pm - CMPE 30043 Numerical Methods [Engr. J. Rodriguez]<br>
+								BSCpE 3-1  7:30pm 9:00pm - CMPE 30193 MOR [Engr. A. Dela Cruz]<br><br>
+								THURSDAY<br>
+								BSCpE 1-2 7:30am - 10:30am - MATH 103 Calculus 2<br>
+								BSCpE 3-4  1:30pm - 4:30pm - CMPE 30174 Computer Networks [Engr. O. Pajabera]<br>
+								BSEE 1-2P  6:00pm 9:00pm - CMPE40213 Software Process [Engr.M. Legarda]<br><br>
+								SATURDAY<br>
+								BSCpE 1-5 7:30am - 10:30am - CMPE 105 Computer Hardware [Engr. A Orique]<br>
+								BSCpE 4-3 10:30am - 1:30pm - CMPE 30273 Engineering Tech [Engr. E. Artificio]<br>
+								BSCpE 4-6  2:00pm - 5:00pm -CMPE 30273 Engineering Tech [Engr. O. Tubola]<br>
+								BSCpE 2-2  6:00pm 9:00pm - CMPE 30063 Numerical Methods [Engr. J. Dela Cruz]<br><br>
+							</p>
+						</div>
+					</div>
+					<div class="content__item" data-space="3.16" data-category="3">
+						<h3 class="content__item-title">Personal Computer 2 (RM 311)</h3>
+						<div class="content__item-details">
+							<p class="content__desc">
+								<strong>- SCHEDULE -</strong><br><br><br>
+								MONDAY<br>
+								BSCpE 1-6 7:30am - 10:30am - STAT 012 Engineering Data<br>
+								BSCpE 3-4 12:00nn - 3:00pm - CMPE 30163 Occupational Health & Safety [Engr. A. Velasco]<br>
+								BSCpE 3-4  3:00pm - 5:00pm - CMPE 30163 CPE Laws [Engr. A. Velasco]<br>
+								BSCpE 1-2P  6:00pm 9:00pm - CMPE 30244 Digital Signal Processing [Engr.J. Binuya]<br><br>
+								TUESDAY<br>
+								BSCpE 1-2 7:30am - 10:30am - STAT 012 Engineering Data<br>
+								BSCpE 3-5 12:00am - 3:00pm - CMPE 30163 Micropro [Engr.J. Cansino]<br>
+								BSCpE 4-4  3:00pm - 6:00pm - CMPE 30274 Embedded Systems [Engr. J. Cansino]<br>
+								BSCpE 1-2  6:00pm 9:00pm - CMPE 011 Computer Programming [Engr.J.Rodriguez]<br><br>
+								WEDNESDAY<br>
+								BSCpE 3-1 11:00am - 2:00pm - CMPE 30174 Computer Networks [Engr.J. Binuya]<br>
+								BSCpE 4-1  2:30pm - 4:30pm - CMPE 40143 Neural Networks [Engr. A. Dela Cruz]<br>
+								BSCpE 2-3 6:00pm 9:00pm - CMPE 40042 Mobile Development [Engr. A. Canlas]<br><br>
+								THURSDAY<br>
+								BSCpE 2-4  9:00am - 12:00nn - ENSC 20011 Computer Aided Drafting<br>
+								BSCpE 3-5 12:00am - 3:00pm - CMPE 30163 Micropro [Engr.J. Cansino]<br>
+								BSCpE 4-4  3:00pm - 6:00pm - CMPE 30274 Embedded Systems [Engr. J. Cansino]<br>
+								BSEE 3-3  6:00pm 9:00pm - ECEN 20093 Micro[Engr.R. Mahaguay]<br><br>
+								FRIDAY<br>
+								BSCpE 1-1 10:30am - 1:30pm -  STAT 012 Engineering Data Analysis<br>
+								BSCpE 2-1  1:30pm - 4:30pm - CMPE 30074 Software Design [Engr. P. Tenerife]<br>
+								BSCpE 1-1  6:00pm 9:00pm -  CMPE 104 Discrete Math [Engr. J. Rodriguez]<br><br>
+								SATURDAY<br>
+								BSCpE 1-4 10:30am - 1:30pm -  CMPE 103 Object Oriented Programming [ Engr. D. Madrigalejos]<br>
+								BSCpE 1-3  2:00pm - 5:00pm - CMPE 105 Computer Hardware [Engr. J. Avila]<br>
+								BSCpE 1-5  5:00pm 8:00pm -  CMPE 103 Object Oriented Programming [ Engr. D. Madrigalejos]<br><br>
+							</p>
+						</div>
+					</div>
+					<div class="content__item" data-space="3.17" data-category="3">
+						<h3 class="content__item-title">Personal Computer 3 (RM 312)</h3>
+						<div class="content__item-details">
+							<p class="content__desc">
+								<strong>- SCHEDULE -</strong><br><br><br>
+								MONDAY<br>
+								BSCpE 1-3P 10:30am - 1:30pm - CMPE 30104 Micropro [Engr. F. Chin]<br>
+								BSCpE 3-3  1:30pm - 6:00pm - CMPE 30184 Micropro [Engr. B. Bucao]<br>
+								BSCpE 2-4  6:00pm 9:00pm - CMPE 40042 Mobile Development  [Engr. F. Chin]<br><br>
+								TUESDAY<br>
+								BSCpE 2-5 11:00am - 2:00pm - CMPE 40042 Mobile Development [Engr. A. Canlas ]<br>
+								BSCpE 3-5  3:00am - 6:00pm - CMPE 20193 MOR [Engr. R. Mahaguay]<br>
+								BSCpE 2-3  6:00pm 9:00pm - CMPE 30043 Numerical Method  [Engr. J. Dela Cruz]<br><br>
+								WEDNESDAY<br>
+								BSCpE 2-1 10:30am - 1:30pm - CMPE 40042 Mobile Development [Engr. A. Canlas ]<br>
+								BSCpE 3-2  1:30pm - 4:30pm - CMPE 30163 Occupational Health & Safety [Engr. F. Oquindo]<br>
+								BSEE 3-4  6:00pm 9:00pm - CMPE 20093 Micro [Engr. P. Mahaguay]<br><br>
+								THURSDAY<br>
+								BSCpE 2-1 10:30am - 1:30pm - CMPE 40042 Mobile Development [Engr. A. Canlas ]<br>
+								BSCpE 3-5  3:00am - 6:00pm - CMPE 20193 Techno[Engr. A. Velasco]<br>
+								BSCpE 1-1P  6:00pm 9:00pm - CMPE 30141 CPE Drafting and Design [Engr. A. Velasco]<br><br>
+								FRIDAY<br>
+								BSCpE 3-6 10:30am - 1:30pm - CMPE 30193 MOR [Engr. A. Velasco]<br>
+								BSCpE 1-1P  2:00pm - 4:00pm - CMPE 40193 Enterprise Software System [Engr. J. Tena]<br>
+								BSCpE 1-1P  4:00pm - 7:00pm - CMPE 40193 Enterprise Software System [Engr. J. Tena]<br>
+								BSCpE 3-4  7:30pm - 9:00pm - CMPE 20103 Techno [Engr. F. Oquindo]<br><br>
+								SATURDAY<br>
+								BSCpE 3-5  8:00am - 11:00am - CMPE 30163 Occupational Health & Safety [Engr. F. Oquindo]<br>
+								BSCpE 3-1  11:00am - 2:00pm - CMPE 30163 Occupational Health & Safety [Engr. F. Oquindo]<br>
+								BSCpE 2-1  3:00pm - 6:00pm - CMPE 30063 Numerical Methods [Engr. N. DLR]<br>
+								BSCpE 2-4  6:00pm - 9:00pm -  ECEN 20034 Electronics [Engr. K. Natividad]<br><br>
+							</p>
+						</div>
+					</div>
+					<div class="content__item" data-space="3.18" data-category="3">
+						<h3 class="content__item-title">Personal Computer 4 (RM 313)</h3>
+						<div class="content__item-details">
+							<p class="content__desc">
+								<strong>- SCHEDULE -</strong><br><br><br>
+								MONDAY<br>
+								BSCE 1-4 7:30am - 10:30am - CMPE 011 Computer Programming [Engr. J. Rodriguez]<br>
+								BSCpE 1-2P 11:00am - 2:00pm - CMPE 30224 Computer System Architecture [Engr. R. Mahaguay]<br>
+								BSCE 1-2P 3:00pm - 6:00pm - CMPE 30224 Computer System Architecture [Engr. R. Mahaguay]<br>
+								BSEE 1-3 6:00pm 9:00pm - CMPE 012 Computer Programming [ Engr. J. Rodriguez]]<br><br>
+								TUESDAY<br>
+								BSCpE 2-4 10:30am - 1:30pm - CMPE 30074 Software Design [Engr. P. Tenerife]<br>
+								BSCpE 2-5  3:00pm - 6:00pm - CMPE 40042 Mobile Development [Engr.A. Canlas]<br>
+								BSCpE 1-3P  6:00pm 9:00pm - CMPE 30244 Digital Signal Processing [ Engr. J.Binuya]<br><br>
+								WEDNESDAY<br>
+								BSCpE 2-1  7:30am - 10:30am - ENSC 20011 Computer Aided Drafting<br>
+								BSCpE 1-1P 10:30am - 1:30pm - CMPE 30244 Digital Signal Processing [Engr. J. Rodriguez]<br>
+								BSCE 2-2 3:00pm - 6:00pm - CMPE 30074 Software Design [Engr. J. Lorico]<br>
+								BSEE 4-1 6:00pm 9:00pm - CMPE 30283 Engineering Technology [Engr. M. Legarde]<br><br>
+								THURSDAY<br>
+								BSCE 1-4  7:30am - 10:30am - CMPE 011 Computer Programming [Engr. J Rodriguez]<br>
+								BSCpE 3-1 11:00am - 2:00pm - CMPE 30184 Micropro [Engr. R. Mahaguay]<br>
+								BSCpE 3-1 3:00pm - 6:00pm - CMPE 30184 Micropro [Engr. R. Mahaguay]<br>
+								BSEE 1-3 6:00pm 9:00pm - CMPE 012 Computer Programming  [Engr. J. Rodriguez]<br><br>
+								FRIDAY<br>
+								BSCpE 1-4  7:30am - 10:30am - CMPE 103 Object Oriented Programming<br>
+								BSCpE 1-4 10:30am - 1:30pm - CMPE 103 Object Oriented Programming<br>
+								BSCpE 3-3 1:30pm - 4:30pm - ENSC 20103 Techno [Engr. L. Reyes]<br>
+								BSEE 1-4 6:00pm 9:00pm - CMPE 012 Computer Programming  [Engr. J. Augusto]<br><br>
+								SATURDAY<br>
+								BSCpE 1-2  7:30am - 10:30am - CMPE 103 Object Oriented Programming [Engr. J. Cansino]<br>
+								BSCpE 1-2 10:30am - 1:30pm - CMPE 103 Object Oriented Programming [Engr. J. Cansino]<br>
+								BSCpE 1-1 2:00pm - 6:00pm - CMPE 103 Object Oriented Programming [Engr. J. Cansino]<br>
+								BSEE 1-2 6:00pm 9:00pm - CMPE 012 Computer Programming  [Engr. J. Rodriguez]<br><br>
+							</p>
+						</div>
+					</div>
+					<div class="content__item" data-space="3.19" data-category="3">
+						<h3 class="content__item-title">Personal Computer 5 (RM 314)</h3>
+						<div class="content__item-details">
+							<p class="content__desc">
+								<strong>- SCHEDULE -</strong><br><br><br>
+							</p>
+						</div>
+					</div>
+					<div class="content__item" data-space="3.20" data-category="3">
+						<h3 class="content__item-title">Personal Computer 6 (RM 315)</h3>
+						<div class="content__item-details">
+							<p class="content__desc">
+								<strong>- SCHEDULE -</strong><br><br><br>
+							</p>
+						</div>
+					</div>
+					<div class="content__item" data-space="3.21" data-category="3">
+						<h3 class="content__item-title">Digital Circuit Lab (RM 316)</h3>
+						<div class="content__item-details">
+							<p class="content__desc">
+								<strong>- SCHEDULE -</strong><br><br><br>
+							</p>
+						</div>
+					</div>
+					<div class="content__item" data-space="3.22" data-category="3">
+						<h3 class="content__item-title">Materials and Science and Eng'g (RM 318)</h3>
+						<div class="content__item-details">
+							<p class="content__desc">
+								<strong>- SCHEDULE -</strong><br><br><br>
+							</p>
+						</div>
+					</div>
+					<div class="content__item" data-space="3.23" data-category="3">
+						<h3 class="content__item-title">CE-RDU (RM 319)</h3>
+						<div class="content__item-details">
+							<p class="content__desc">
+								<strong>- SCHEDULE -</strong><br><br><br>
+							</p>
+						</div>
+					</div>
+					<div class="content__item" data-space="3.24" data-category="3">
+						<h3 class="content__item-title">Office of the Chief (RM 320)</h3>
+						<div class="content__item-details">
+							<p class="content__desc">
+								<strong>- SCHEDULE -</strong><br><br><br>
+							</p>
+						</div>
+					</div>
+					<div class="content__item" data-space="3.25" data-category="3">
+						<h3 class="content__item-title">Accreditation Center (RM 321)</h3>
+						<div class="content__item-details">
+							<p class="content__desc">
+								<strong>- SCHEDULE -</strong><br><br><br>
+							</p>
+						</div>
+					</div>
+					<div class="content__item" data-space="3.26" data-category="3">
+						<h3 class="content__item-title">Office of the Chairperson - ECE (RM 322)</h3>
+					</div>
+					<div class="content__item" data-space="3.27" data-category="3">
+						<h3 class="content__item-title">Office of the Chairperson - CoE (RM 323)</h3>
+					</div>
+					<div class="content__item" data-space="4.01" data-category="4">
+						<h3 class="content__item-title">Engineering Faculty Center (RM 401)</h3>
+					</div>
+					<div class="content__item" data-space="4.02" data-category="4">
+						<h3 class="content__item-title">Extension Services Involvement and Community (RM 402)</h3>
+					</div>
+					<div class="content__item" data-space="4.03" data-category="4">
+						<h3 class="content__item-title">CEA-SC and Academic Org Monitoring Center (RM 403)</h3>
+					</div>
+					<div class="content__item" data-space="4.04" data-category="4">
+						<h3 class="content__item-title">General Physics Lab 2 (RM 404)</h3>
+					</div>
+					<div class="content__item" data-space="4.05" data-category="4">
+						<h3 class="content__item-title">General Physics Lab 1 (RM 405)</h3>
+					</div>
+					<div class="content__item" data-space="4.06" data-category="4">
+						<h3 class="content__item-title">Lecture Room (RM 406)</h3>
+					</div>
+					<div class="content__item" data-space="4.07" data-category="4">
+						<h3 class="content__item-title">Lecture Room (RM 407)</h3>
+						
+					</div>
+					<div class="content__item" data-space="4.08" data-category="4">
+						<h3 class="content__item-title">Electrical Fundamental Lab (RM 408)</h3>
+					</div>
+					<div class="content__item" data-space="4.09" data-category="4">
+						<h3 class="content__item-title">Electrical Fundamental Lab (RM 409A)</h3>
+					</div>
+					<div class="content__item" data-space="4.10" data-category="4">
+						<h3 class="content__item-title">EEN Office (RM 409B)</h3>
+					</div>
+					<div class="content__item" data-space="4.11" data-category="4">
+						<h3 class="content__item-title">Library (RM 410)</h3>
+					</div>
+					<div class="content__item" data-space="4.12" data-category="4">
+						<h3 class="content__item-title">CE Lecture Room (RM 411)</h3>
+					</div>
+					<div class="content__item" data-space="4.13" data-category="4">
+						<h3 class="content__item-title">ECE Lecture Room (RM 412)</h3>
+					</div>
+					<div class="content__item" data-space="4.14" data-category="4">
+						<h3 class="content__item-title">CoE Lecture Room (RM 413)</h3>
+					</div>
+					<div class="content__item" data-space="4.15" data-category="4">
+						<h3 class="content__item-title">EE Lecture Room (RM 414)</h3>
+					</div>
+					<div class="content__item" data-space="4.16" data-category="4">
+						<h3 class="content__item-title">IE Lecture Room (RM 415)</h3>
+					</div>
+					<div class="content__item" data-space="4.17" data-category="4">
+						<h3 class="content__item-title">Architecture Lecture Room (RM 416)</h3>
+					</div>
+					<div class="content__item" data-space="4.18" data-category="4">
+						<h3 class="content__item-title">ME Lecture Room (RM 417)</h3>
+					</div>
+					<div class="content__item" data-space="4.19" data-category="4">
+						<h3 class="content__item-title">ME Lecture Room (RM 418)</h3>
+					</div>
+					<div class="content__item" data-space="4.20" data-category="4">
+						<h3 class="content__item-title">Gen. Chemistry Lab 1 (RM 419)</h3>
+					</div>
+					<div class="content__item" data-space="4.21" data-category="4">
+						<h3 class="content__item-title">Gen. Chemistry Lab 2 (RM 420)</h3>
+					</div>
+					<div class="content__item" data-space="4.22" data-category="4">
+						<h3 class="content__item-title">NAT'L Science Faculty Room (RM 421)</h3>
+					</div>
+					<div class="content__item" data-space="4.23" data-category="4">
+						<h3 class="content__item-title">Office of the LAB Head (RM 422)</h3>
+					</div>
+					<div class="content__item" data-space="4.24" data-category="4">
+						<h3 class="content__item-title">Spectrum Office (RM 423)</h3>
+					</div>
+					<div class="content__item" data-space="4.25" data-category="4">
+						<h3 class="content__item-title">CoE Library (RM 424)</h3>
+					</div>
+					<div class="content__item" data-space="4.26" data-category="4">
+						<h3 class="content__item-title">Audio Visual Room (AVR) (RM 425)</h3>
+					</div>
+					
+					<button class="boxbutton boxbutton--dark content__button content__button--hidden" aria-label="Close details"><svg class="icon icon--cross"><use xlink:href="#icon-cross"></use></svg></button>
+				</div>
+				<!-- content -->
+			</div>
+			<!-- /main -->
+			<aside class="spaces-list" id="spaces-list">
+				<div class="search">
+					<input class="search__input" placeholder="Search..." />
+					<button class="boxbutton boxbutton--darker close-search" aria-label="Close details"><svg class="icon icon--cross"><use xlink:href="#icon-cross"></use></svg></button>
+				</div>
+				<span class="label">
+					<input id="sort-by-name" class="label__checkbox" type="checkbox" aria-label="Show alphabetically"/>
+					<label class="label__text">A - Z</label>
+				</span>
+				<ul class="list grouped-by-category">
+					<li class="list__item" data-level="1" data-category="1" data-space="1.01"><a href="#" class="list__link">Power and Steam Lab (RM 100)</a></li>
+					<li class="list__item" data-level="1" data-category="1" data-space="1.02"><a href="#" class="list__link">Welding and Foundry Shop (RM 101)</a></li>
+					<li class="list__item" data-level="1" data-category="1" data-space="1.03"><a href="#" class="list__link">Automotive Lab (RM 102)</a></li>
+					<li class="list__item" data-level="1" data-category="1" data-space="1.04"><a href="#" class="list__link">Mechanical Design Lab (RM 103)</a></li>
+					<li class="list__item" data-level="1" data-category="1" data-space="1.05"><a href="#" class="list__link">Plumbing Tech Lab (RM 104)</a></li>
+					<li class="list__item" data-level="1" data-category="1" data-space="1.06"><a href="#" class="list__link">Soil Mechanics Lab (RM 105A)</a></li>	
+					<li class="list__item" data-level="1" data-category="1" data-space="1.07"><a href="#" class="list__link">C.E. Lab Office (RM 105B)</a></li>
+					<li class="list__item" data-level="1" data-category="1" data-space="1.08"><a href="#" class="list__link">Material and Testing Lab (RM 106)</a></li>
+					<li class="list__item" data-level="1" data-category="1" data-space="1.09"><a href="#" class="list__link">Electrical Power Lab (RM 107)</a></li>
+					<li class="list__item" data-level="1" data-category="1" data-space="1.10"><a href="#" class="list__link">Electrical Workshop Lab (RM 108)</a></li>
+					<li class="list__item" data-level="1" data-category="1" data-space="1.11"><a href="#" class="list__link">Civil Engineering Tech Lab (RM 109)</a></li>
+					<li class="list__item" data-level="1" data-category="1" data-space="1.12"><a href="#" class="list__link">Refrigeration and Air Conditionaing Lab (RM 110)</a></li>
+					<li class="list__item" data-level="1" data-category="1" data-space="1.13"><a href="#" class="list__link">Fluid and Hydrualics Lab (RM 111)</a></li>
+					<li class="list__item" data-level="1" data-category="1" data-space="1.14"><a href="#" class="list__link">Thermodynamics Lab (RM 112)</a></li>
+					<li class="list__item" data-level="1" data-category="1" data-space="1.15"><a href="#" class="list__link">Machine Shop (RM 113)</a></li>
+					<li class="list__item" data-level="1" data-category="1" data-space="1.16"><a href="#" class="list__link">Dean's office (RM 115)</a></li>
+					<li class="list__item" data-level="1" data-category="1" data-space="1.17"><a href="#" class="list__link">Faculty Room (RM 116)</a></li>
+					<li class="list__item" data-level="2" data-category="2" data-space="2.01"><a href="#" class="list__link">CAD Room (RM 200)</a></li>
+					<li class="list__item" data-level="2" data-category="2" data-space="2.02"><a href="#" class="list__link">Visual Techniques (RM 201)</a></li>
+					<li class="list__item" data-level="2" data-category="2" data-space="2.03"><a href="#" class="list__link">Model Making/Building Tech (RM 202)</a></li>
+					<li class="list__item" data-level="2" data-category="2" data-space="2.04"><a href="#" class="list__link">Architecture Lecture ROom (RM 203)</a></li>
+					<li class="list__item" data-level="2" data-category="2" data-space="2.05"><a href="#" class="list__link">CEA Medical Clinic (RM 204)</a></li>
+					<li class="list__item" data-level="2" data-category="2" data-space="2.06"><a href="#" class="list__link">IE Lecture Room (RM 205)</a></li>
+					<li class="list__item" data-level="2" data-category="2" data-space="2.07"><a href="#" class="list__link">Mechanical Drafting 3 (RM 206)</a></li>
+					<li class="list__item" data-level="2" data-category="2" data-space="2.08"><a href="#" class="list__link">Mechanical Drafting 2 (RM 207)</a></li>
+					<li class="list__item" data-level="2" data-category="2" data-space="2.09"><a href="#" class="list__link">Mechanical Drafting 1 (RM 208)</a></li>
+					<li class="list__item" data-level="2" data-category="2" data-space="2.10"><a href="#" class="list__link">Manufacturing Lec/Lab Room (RM 209)</a></li>
+					<li class="list__item" data-level="2" data-category="2" data-space="2.11"><a href="#" class="list__link">Printing/Packaging Lecture/Laboratory Room (RM 210)</a></li>
+					<li class="list__item" data-level="2" data-category="2" data-space="2.12"><a href="#" class="list__link">Multimedia Room (RM 211)</a></li>
+					<li class="list__item" data-level="2" data-category="2" data-space="2.13"><a href="#" class="list__link">CAFA Lab Office (RM 212A)</a></li>
+					<li class="list__item" data-level="2" data-category="2" data-space="2.14"><a href="#" class="list__link">RM 212B</a></li>
+					<li class="list__item" data-level="2" data-category="2" data-space="2.15"><a href="#" class="list__link">Architectural Drafting Room 1 (RM 213)</a></li>
+					<li class="list__item" data-level="2" data-category="2" data-space="2.16"><a href="#" class="list__link">Architectural Drafting Room 2 (RM 214)</a></li>
+					<li class="list__item" data-level="2" data-category="2" data-space="2.17"><a href="#" class="list__link">Architectural Drafting Room 3 (RM 215)</a></li>
+					<li class="list__item" data-level="2" data-category="2" data-space="2.18"><a href="#" class="list__link">Office of the Chairperson - IE (RM 216)</a></li>
+					<li class="list__item" data-level="2" data-category="2" data-space="2.19"><a href="#" class="list__link">Office of the Chairperson - ME (RM 217)</a></li>
+					<li class="list__item" data-level="2" data-category="2" data-space="2.20"><a href="#" class="list__link">Office of the Chairperson - CE (RM 218)</a></li>
+					<li class="list__item" data-level="2" data-category="2" data-space="2.21"><a href="#" class="list__link">Office of the Chairperson - Archi (RM 219)</a></li>
+					<li class="list__item" data-level="2" data-category="2" data-space="2.22"><a href="#" class="list__link">Office of the Chairperson - EE (RM 220)</a></li>
+					<li class="list__item" data-level="2" data-category="2" data-space="2.23"><a href="#" class="list__link">IE Time and Motion Lab (RM 221)</a></li>
+					<li class="list__item" data-level="3" data-category="3" data-space="3.01"><a href="#" class="list__link">Micro Computer Lab (RM 300)</a></li>
+					<li class="list__item" data-level="3" data-category="3" data-space="3.02"><a href="#" class="list__link">Micro Computer Lab Office (RM 301)</a></li>
+					<li class="list__item" data-level="3" data-category="3" data-space="3.03."><a href="#" class="list__link">Computer Lab Office (RM 302)</a></li>
+					<li class="list__item" data-level="3" data-category="3" data-space="3.04"><a href="#" class="list__link">Electronics Engineering Lab (RM 303A)</a></li>
+					<li class="list__item" data-level="3" data-category="3" data-space="3.05"><a href="#" class="list__link">PUP Ham (RM 303B)</a></li>
+					<li class="list__item" data-level="3" data-category="3" data-space="3.06"><a href="#" class="list__link">Comm. Fundamentals Lab (RM 304A)</a></li>
+					<li class="list__item" data-level="3" data-category="3" data-space="3.07"><a href="#" class="list__link">Ecess Office (RM 304B)</a></li>
+					<li class="list__item" data-level="3" data-category="3" data-space="3.08"><a href="#" class="list__link">Communication Eng'g Lab (RM 305A)</a></li>
+					<li class="list__item" data-level="3" data-category="3" data-space="3.09"><a href="#" class="list__link">Smart Wireless Lab (RM 305B)</a></li>
+					<li class="list__item" data-level="3" data-category="3" data-space="3.10"><a href="#" class="list__link">Electronics Fundamentals Lab (RM 306A)</a></li>
+					<li class="list__item" data-level="3" data-category="3" data-space="3.11"><a href="#" class="list__link">RM 306B</a></li>
+					<li class="list__item" data-level="3" data-category="3" data-space="3.12"><a href="#" class="list__link">CE Computer Room(RM 307)</a></li>
+					<li class="list__item" data-level="3" data-category="3" data-space="3.13"><a href="#" class="list__link">Automatic Control Lab (RM 308)</a></li>
+					<li class="list__item" data-level="3" data-category="3" data-space="3.14"><a href="#" class="list__link">RM 309</a></li>
+					<li class="list__item" data-level="3" data-category="3" data-space="3.15"><a href="#" class="list__link">Personal Computer 1 (RM 310)</a></li>
+					<li class="list__item" data-level="3" data-category="3" data-space="3.16"><a href="#" class="list__link">Personal Computer 2 (RM 311)</a></li>
+					<li class="list__item" data-level="3" data-category="3" data-space="3.17"><a href="#" class="list__link">Personal Computer 3 (RM 312)</a></li>
+					<li class="list__item" data-level="3" data-category="3" data-space="3.18"><a href="#" class="list__link">Personal Computer 4 (RM 313)</a></li>
+					<li class="list__item" data-level="3" data-category="3" data-space="3.19"><a href="#" class="list__link">Personal Computer 5 (RM 314)</a></li>
+					<li class="list__item" data-level="3" data-category="3" data-space="3.20"><a href="#" class="list__link">Personal Computer 6 (RM 315)</a></li>
+					<li class="list__item" data-level="3" data-category="3" data-space="3.21"><a href="#" class="list__link">Digital Circuit Lab (RM 316)</a></li>
+					<li class="list__item" data-level="3" data-category="3" data-space="3.22"><a href="#" class="list__link">Materials and Science and Eng'g (RM 318)</a></li>
+					<li class="list__item" data-level="3" data-category="3" data-space="3.23"><a href="#" class="list__link">CE-RDU (RM 319)</a></li>
+					<li class="list__item" data-level="3" data-category="3" data-space="3.24"><a href="#" class="list__link">Office of the Chief (RM 320)</a></li>
+					<li class="list__item" data-level="3" data-category="3" data-space="3.25"><a href="#" class="list__link">Accreditation Center (RM 321)</a></li>
+					<li class="list__item" data-level="3" data-category="3" data-space="3.26"><a href="#" class="list__link">Office of the Chairperson - ECE (RM 322)</a></li>
+					<li class="list__item" data-level="3" data-category="3" data-space="3.27"><a href="#" class="list__link">Office of the Chairperson - CoE (RM 323)</a></li>
+					<li class="list__item" data-level="4" data-category="4" data-space="4.01"><a href="#" class="list__link">Engineering Faculty Center (RM 401)</a></li>
+					<li class="list__item" data-level="4" data-category="4" data-space="4.02"><a href="#" class="list__link">Extension Services Involvement and Community (RM 402)</a></li>
+					<li class="list__item" data-level="4" data-category="4" data-space="4.03"><a href="#" class="list__link">CEA-SC and Academic Org Monitoring Center (RM 403)</a></li>
+					<li class="list__item" data-level="4" data-category="4" data-space="4.04"><a href="#" class="list__link">General Physics Lab 2 (RM 404)</a></li>
+					<li class="list__item" data-level="4" data-category="4" data-space="4.05"><a href="#" class="list__link">General Physics Lab 1 (RM 405)</a></li>
+					<li class="list__item" data-level="4" data-category="4" data-space="4.06"><a href="#" class="list__link">Lecture Room (RM 406)</a></li>
+					<li class="list__item" data-level="4" data-category="4" data-space="4.07"><a href="#" class="list__link">Lecture Room (RM 407)</a></li>
+					<li class="list__item" data-level="4" data-category="4" data-space="4.08"><a href="#" class="list__link">Electrical Fundamental Lab (RM 408)</a></li>
+					<li class="list__item" data-level="4" data-category="4" data-space="4.09"><a href="#" class="list__link">Electrical Fundamental Lab (RM 409A)</a></li>
+					<li class="list__item" data-level="4" data-category="4" data-space="4.10"><a href="#" class="list__link">EEN Office (RM 409B)</a></li>
+					<li class="list__item" data-level="4" data-category="4" data-space="4.11"><a href="#" class="list__link">Library (RM 410)</a></li>
+					<li class="list__item" data-level="4" data-category="4" data-space="4.12"><a href="#" class="list__link">CE Lecture Room (RM 411)</a></li>
+					<li class="list__item" data-level="4" data-category="4" data-space="4.13"><a href="#" class="list__link">ECE Lecture Room (RM 412)</a></li>
+					<li class="list__item" data-level="4" data-category="4" data-space="4.14"><a href="#" class="list__link">CoE Lecture Room (RM 413)</a></li>
+					<li class="list__item" data-level="4" data-category="4" data-space="4.15"><a href="#" class="list__link">EE Lecture Room (RM 414)</a></li>
+					<li class="list__item" data-level="4" data-category="4" data-space="4.16"><a href="#" class="list__link">IE Lecture Room (RM 415)</a></li>
+					<li class="list__item" data-level="4" data-category="4" data-space="4.17"><a href="#" class="list__link">Architecture Lecture Room (RM 416)</a></li>
+					<li class="list__item" data-level="4" data-category="4" data-space="4.18"><a href="#" class="list__link">ME Lecture Room (RM 418)</a></li>
+					<li class="list__item" data-level="4" data-category="4" data-space="4.19"><a href="#" class="list__link">ME Lecture Room (RM 419)</a></li>
+					<li class="list__item" data-level="4" data-category="4" data-space="4.20"><a href="#" class="list__link">Gen. Chemistry Lab 1 (RM 420)</a></li>
+					<li class="list__item" data-level="4" data-category="4" data-space="4.21"><a href="#" class="list__link">Gen. Chemistry Lab 2 (RM 421)</a></li>
+					<li class="list__item" data-level="4" data-category="4" data-space="4.22"><a href="#" class="list__link">NAT'L Science Faculty Room (RM 422)</a></li>
+					<li class="list__item" data-level="4" data-category="4" data-space="4.23"><a href="#" class="list__link">Office of the LAB Head (RM 423)</a></li>
+					<li class="list__item" data-level="4" data-category="4" data-space="4.24"><a href="#" class="list__link">Spectrum Office (RM 424)</a></li>
+					<li class="list__item" data-level="4" data-category="4" data-space="4.25"><a href="#" class="list__link">CoE Library (RM 425)</a></li>
+					<li class="list__item" data-level="4" data-category="4" data-space="4.26"><a href="#" class="list__link">Audio Visual Room (AVR) (RM 426)</a></li>
+				</ul>
+			</aside>
+			<!-- /spaces-list -->
+		</div>
+		<!-- /container -->
+		<script src="js/classie.js"></script>
+		<script src="js/list.min.js"></script>
+		<script src="js/main.js"></script>
+		
+		<footer>
+			<p class="foot">&copy; 2023 CEAways Map</p>
+		</footer>
+	</body>
