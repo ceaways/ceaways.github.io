@@ -65,7 +65,7 @@
 <body>
   <div class="container">
     <h1>CEAways</h1>
-    <form>
+    <form onsubmit="return signInWithEmail(event)">
       <label for="email">Email:</label>
       <input type="email" id="email" name="email" required>
       <label for="password">Password:</label>
@@ -75,23 +75,35 @@
     <div class="divider">OR</div>
     <div class="google-button">
       <!-- Google Sign-In Button -->
-      <div class="g-signin2" data-onsuccess="onSignIn"></div>
+      <div class="g-signin2" data-onsuccess="onGoogleSignIn"></div>
     </div>
   </div>
+
   <!-- Google Sign-In API script -->
   <script src="https://apis.google.com/js/platform.js" async defer></script>
   <meta name="google-signin-client_id" content="145377630036-6bdpgehtvf5aek1jdrqu81c4jhded06a.apps.googleusercontent.com">
 
   <script>
-    // ... The existing JavaScript functions for sign-in ...
-    
     // Function called when Google Sign-In is successful
-    function onSignIn(googleUser) {
+    function onGoogleSignIn(googleUser) {
       var profile = googleUser.getBasicProfile();
       console.log("ID: " + profile.getId()); // Do something with the user's ID
       console.log("Name: " + profile.getName()); // Do something with the user's name
       console.log("Image URL: " + profile.getImageUrl()); // Do something with the user's profile picture URL
       console.log("Email: " + profile.getEmail()); // Do something with the user's email
+    }
+
+    // Function to handle form submission with email and password
+    function signInWithEmail(event) {
+      event.preventDefault();
+      var email = document.getElementById("email").value;
+      var password = document.getElementById("password").value;
+      // Implement your sign-in logic with email and password here
+      // For demonstration purposes, we'll just log the values in the console:
+      console.log("Email: " + email);
+      console.log("Password: " + password);
+      // Add your sign-in logic using email and password here
+      return false;
     }
   </script>
 </body>
