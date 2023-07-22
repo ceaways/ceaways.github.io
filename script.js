@@ -4,7 +4,7 @@ function onSignIn(googleUser) {
   console.log('ID Token:', id_token);
 
   // Send the ID token to your backend server
-  fetch('YOUR_BACKEND_SERVER_URL/auth/callback', {
+  fetch('http://localhost:3000/auth/callback', {
     method: 'POST',
     headers: {
       'Content-Type': 'application/json',
