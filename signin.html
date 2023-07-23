@@ -1,7 +1,9 @@
 <!DOCTYPE html>
-<html>
+<html lang="en">
 <head>
-  <title>CEAways Sign In</title>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>CEAways Sign In & Sign Up</title>
   <style>
     body {
       margin: 0;
@@ -15,120 +17,94 @@
     }
 
     .container {
-      text-align: center;
-      padding: 20px;
-      background-color: #ffffff;
+      background-color: #fff;
       border-radius: 10px;
-      box-shadow: 0 0 10px rgba(0, 0, 0, 0.2);
-      max-width: 400px;
-      width: 80%;
+      padding: 20px;
+      width: 300px;
+    }
+
+    .form {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
     }
 
     h1 {
+      margin-bottom: 20px;
       color: #A4133C;
-      margin-bottom: 30px;
-    }
-
-    form {
-      display: flex;
-      flex-direction: column;
-    }
-
-    label {
-      font-weight: bold;
-      margin-bottom: 5px;
     }
 
     input {
       padding: 10px;
-      margin-bottom: 20px;
+      margin-bottom: 10px;
       border: 1px solid #A4133C;
       border-radius: 5px;
+      width: 100%;
     }
 
     button {
-      padding: 10px;
       background-color: #A4133C;
-      color: #ffffff;
+      color: #fff;
       border: none;
+      padding: 10px;
       border-radius: 5px;
       cursor: pointer;
-      font-weight: bold;
-      transition: background-color 0.3s;
+      width: 100%;
     }
 
     button:hover {
-      background-color: #8A0D2E;
+      background-color: #8B0F34;
+    }
+
+    .switch {
+      text-align: center;
+      margin-top: 10px;
+      color: #A4133C;
+    }
+
+    a {
+      color: #8B0F34;
+      text-decoration: none;
+    }
+
+    a:hover {
+      text-decoration: underline;
     }
   </style>
 </head>
 <body>
   <div class="container">
-    <h1>CEAways</h1>
-    <form onsubmit="return signInWithEmail(event)">
-      <label for="email">Email:</label>
-      <input type="email" id="email" name="email" required>
-      <label for="password">Password:</label>
-      <input type="password" id="password" name="password" required>
+    <form class="form" id="signin-form">
+      <h1>CEAways Sign In</h1>
+      <input type="text" placeholder="Username" required>
+      <input type="password" placeholder="Password" required>
       <button type="submit">Sign In</button>
     </form>
-    <div class="divider">OR</div>
-    <div class="google-button">
-      <!-- Google Sign-In Button -->
-      <div class="g-signin2" data-onsuccess="onGoogleSignIn"></div>
-    </div>
+    <form class="form" id="signup-form" style="display: none;">
+      <h1>CEAways Sign Up</h1>
+      <input type="text" placeholder="Username" required>
+      <input type="email" placeholder="Email" required>
+      <input type="password" placeholder="Password" required>
+      <input type="password" placeholder="Confirm Password" required>
+      <button type="submit">Sign Up</button>
+    </form>
+    <p class="switch">Don't have an account? <a href="#" onclick="toggleForms()">Sign Up</a></p>
+    <p class="switch" style="display: none;">Already have an account? <a href="#" onclick="toggleForms()">Sign In</a></p>
   </div>
 
-  <!-- Google Sign-In API script -->
-  <script src="https://apis.google.com/js/platform.js" async defer></script>
-  <meta name="google-signin-client_id" content="145377630036-6bdpgehtvf5aek1jdrqu81c4jhded06a.apps.googleusercontent.com">
-
   <script>
-    // Function called when Google Sign-In is successful
-    function onGoogleSignIn(googleUser) {
-      var profile = googleUser.getBasicProfile();
-      console.log("ID: " + profile.getId()); // Do something with the user's ID
-      console.log("Name: " + profile.getName()); // Do something with the user's name
-      console.log("Image URL: " + profile.getImageUrl()); // Do something with the user's profile picture URL
-      console.log("Email: " + profile.getEmail()); // Do something with the user's email
-    }
+    function toggleForms() {
+      const signInForm = document.getElementById('signin-form');
+      const signUpForm = document.getElementById('signup-form');
+      const signInSwitch = document.querySelector('.switch');
+      const signUpSwitch = document.querySelectorAll('.switch')[1];
 
-    // Function to handle form submission with email and password
-    function signInWithEmail(event) {
-      event.preventDefault();
-      var email = document.getElementById("email").value;
-      var password = document.getElementById("password").value;
-      // Implement your sign-in logic with email and password here
-      // For demonstration purposes, we'll just log the values in the console:
-      console.log("Email: " + email);
-      console.log("Password: " + password);
-      // Add your sign-in logic using email and password here
-      return false;
+      signInForm.style.display = signInForm.style.display === 'none' ? 'block' : 'none';
+      signUpForm.style.display = signUpForm.style.display === 'none' ? 'block' : 'none';
+      signInSwitch.style.display = signInSwitch.style.display === 'none' ? 'block' : 'none';
+      signUpSwitch.style.display = signUpSwitch.style.display === 'none' ? 'block' : 'none';
     }
   </script>
 </body>
-
-   
-  <script type="module">
-  // Import the functions you need from the SDKs you need
-  import { initializeApp } from "https://www.gstatic.com/firebasejs/10.1.0/firebase-app.js";
-  // TODO: Add SDKs for Firebase products that you want to use
-  // https://firebase.google.com/docs/web/setup#available-libraries
-
-  // Your web app's Firebase configuration
-  const firebaseConfig = {
-    apiKey: "AIzaSyBvRui7Ey3DkSHUavLDtEHyKp9fMoEpT-c",
-    authDomain: "ceaways---interactive-map.firebaseapp.com",
-    databaseURL: "https://ceaways---interactive-map-default-rtdb.asia-southeast1.firebasedatabase.app",
-    projectId: "ceaways---interactive-map",
-    storageBucket: "ceaways---interactive-map.appspot.com",
-    messagingSenderId: "389516668854",
-    appId: "1:389516668854:web:ed099ff2045cc689bd9b17"
-  };
-
-  // Initialize Firebase
-  const app = initializeApp(firebaseConfig);
-</script>
-
-  
 </html>
+
