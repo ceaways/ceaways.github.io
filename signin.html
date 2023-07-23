@@ -126,14 +126,14 @@
   const database = getDatabase(app);
   const auth = getAuth();
 
-  signUp.addEventListener('click',(e) => {
+signUp.addEventListener('click',(e) => {
 
 var email = document.getElementByID('email').value;
 var password = document.getElementByID('password').value;
 var username = document.getElementByID('username').value;
     
 createUserWithEmailAndPassword(auth, email, password)
-  .then((userCredential) => {
+    .then((userCredential) => {
     // Signed in 
     const user = userCredential.user;
     alert('user created!');
@@ -145,7 +145,7 @@ createUserWithEmailAndPassword(auth, email, password)
 
     alert(errorMessage);
     // ..
-  });
+    });
   })
   </script>
 
