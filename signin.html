@@ -1,15 +1,13 @@
 <!DOCTYPE html>
-<html lang="en">
+<html>
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title> CEAways Sign In & Sign Up</title>
+  <title>CEAways - Sign Up</title>
   <style>
     body {
+      font-family: Arial, sans-serif;
+      background-color: #f8f8f8;
       margin: 0;
       padding: 0;
-      font-family: Arial, sans-serif;
-      background-color: #A4133C;
       display: flex;
       justify-content: center;
       align-items: center;
@@ -18,136 +16,61 @@
 
     .container {
       background-color: #fff;
-      border-radius: 10px;
       padding: 20px;
-      width: 300px;
-    }
-
-    .form {
-      display: flex;
-      flex-direction: column;
-      align-items: center;
+      border-radius: 8px;
+      box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+      max-width: 400px;
+      width: 100%;
     }
 
     h1 {
-      margin-bottom: 20px;
-      color: #A4133C;
+      text-align: center;
+      color: #333;
     }
 
-    input {
+    input[type="text"],
+    input[type="email"],
+    input[type="password"] {
+      width: 100%;
       padding: 10px;
-      margin-bottom: 10px;
-      border: 1px solid #A4133C;
-      border-radius: 5px;
-      width: 80%; /* Adjusted the width to make the input fields shorter */
+      margin-bottom: 20px;
+      border: 1px solid #ccc;
+      border-radius: 4px;
     }
 
     button {
-      background-color: #A4133C;
+      width: 100%;
+      padding: 10px;
+      background-color: #4caf50;
       color: #fff;
       border: none;
-      padding: 10px;
-      border-radius: 5px;
+      border-radius: 4px;
       cursor: pointer;
-      width: 80%; /* Adjusted the width to make the button shorter */
+      font-size: 16px;
     }
 
     button:hover {
-      background-color: #8B0F34;
+      background-color: #45a049;
     }
 
-    .switch {
+    .footer {
       text-align: center;
-      margin-top: 10px;
-      color: #A4133C;
-    }
-
-    a {
-      color: #8B0F34;
-      text-decoration: none;
-    }
-
-    a:hover {
-      text-decoration: underline;
+      color: #666;
     }
   </style>
 </head>
 <body>
   <div class="container">
-    <form class="form" id="signin-form" >
-      <h1>CEAways Sign In</h1>
-      <input type="text" placeholder="username" required>
+    <h1>CEAways</h1>
+    <form>
+      <input type="text" placeholder="Full Name" required>
+      <input type="email" placeholder="Email Address" required>
       <input type="password" placeholder="Password" required>
-      <input type="submit" id="signIn" value="Sign In">Sign In</button>
-      <p class="switch">Don't have an account? <a href="#" onclick="toggleForms()">Sign Up</a></p>
-    </form>
-    <form class="form" id="signup-form" style="display: none;">
-      <h1>CEAways Sign Up</h1>
-      <input type="text" id="username" placeholder="username" required>
-      <input type="email" id="email" placeholder="Email" required>
-      <input type="password" id="password" placeholder="Password" required>
-      <input type="submit" id="signUp" name="signup_submit" value="Sign Up">Sign Up</button>
-      <p class="switch">Already have an account? <a href="#" onclick="toggleForms()">Sign In</a></p>
+      <button type="submit">Sign Up</button>
     </form>
   </div>
-
-  <script>
-    function toggleForms() {
-      const signInForm = document.getElementById('signin-form');
-      const signUpForm = document.getElementById('signup-form');
-      
-      signInForm.style.display = signInForm.style.display === 'none' ? 'block' : 'none';
-      signUpForm.style.display = signUpForm.style.display === 'none' ? 'block' : 'none';
-    }
-  </script>
+  <div class="footer">
+    &copy; 2023 CEAways. All rights reserved.
+  </div>
 </body>
-
-  <script type="module">
-  // Import the functions you need from the SDKs you need
-  import { initializeApp } from "https://www.gstatic.com/firebasejs/10.1.0/firebase-app.js";
-  import { getDatabase } from "https://www.gstatic.com/firebasejs/10.1.0/firebase-database.js";
-  import { getAuth, createUserWithEmailAndPassword } from "https://www.gstatic.com/firebasejs/10.1.0/firebase-auth.js";
-  // TODO: Add SDKs for Firebase products that you want to use
-  // https://firebase.google.com/docs/web/setup#available-libraries
-
-  // Your web app's Firebase configuration
-  const firebaseConfig = {
-    apiKey: "AIzaSyBvRui7Ey3DkSHUavLDtEHyKp9fMoEpT-c",
-    authDomain: "ceaways---interactive-map.firebaseapp.com",
-    databaseURL: "https://ceaways---interactive-map-default-rtdb.asia-southeast1.firebasedatabase.app",
-    projectId: "ceaways---interactive-map",
-    storageBucket: "ceaways---interactive-map.appspot.com",
-    messagingSenderId: "389516668854",
-    appId: "1:389516668854:web:ed099ff2045cc689bd9b17"
-  };
-
-  // Initialize Firebase
-  const app = initializeApp(firebaseConfig);
-  const database = getDatabase(app);
-  const auth = getAuth();
-
-signUp.addEventListener('click',(e) => {
-
-var email = document.getElementByID('email').value;
-var password = document.getElementByID('password').value;
-var username = document.getElementByID('username').value;
-    
-createUserWithEmailAndPassword(auth, email, password)
-    .then((userCredential) => {
-    // Signed in 
-    const user = userCredential.user;
-    alert('user created!');
-    // ...
-  })
-  .catch((error) => {
-    const errorCode = error.code;
-    const errorMessage = error.message;
-
-    alert(errorMessage);
-    // ..
-    });
-  })
-  </script>
-
 </html>
-
