@@ -74,14 +74,14 @@
 </head>
 <body>
   <div class="container">
-    <form class="form" id="signin-form">
+    <form class="form" >
       <h1>CEAways Sign In</h1>
       <input type="text" placeholder="Username" required>
       <input type="password" placeholder="Password" required>
       <input type="submit" id="SignIn" value="Sign In">Sign In</button>
       <p class="switch">Don't have an account? <a href="#" onclick="toggleForms()">Sign Up</a></p>
     </form>
-    <form class="form" id="signup-form" style="display: none;">
+    <form class="form" style="display: none;">
       <h1>CEAways Sign Up</h1>
       <input type="text" id="username" placeholder="Username" required>
       <input type="email" id="email" placeholder="Email" required>
@@ -105,9 +105,9 @@
 
   <script type="module">
   // Import the functions you need from the SDKs you need
-  import { initializeApp } from "https://www.gstatic.com/firebasejs/9.4.0/firebase-app.js";
-  import { getDatabase } from "https://www.gstatic.com/firebasejs/9.4.0/firebase-database.js";
-  import { getAuth, createUserWithEmailAndPassword } from "https://www.gstatic.com/firebasejs/9.4.0/firebase-auth.js";
+  import { initializeApp } from "https://www.gstatic.com/firebasejs/10.1.0/firebase-app.js";
+  import { getDatabase } from "https://www.gstatic.com/firebasejs/10.1.0/firebase-database.js";
+  import { getAuth, createUserWithEmailAndPassword } from "https://www.gstatic.com/firebasejs/10.1.0/firebase-auth.js";
   // TODO: Add SDKs for Firebase products that you want to use
   // https://firebase.google.com/docs/web/setup#available-libraries
 
