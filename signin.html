@@ -78,15 +78,17 @@
       <h1>CEAways Sign In</h1>
       <input type="text" placeholder="Username" required>
       <input type="password" placeholder="Password" required>
-      <input type="submit" id="SignIn" value="Sign In">Sign In</button>
+      <input type="submit" id="SignIn"  value="Sign In">Sign In</button>
       <p class="switch">Don't have an account? <a href="#" onclick="toggleForms()">Sign Up</a></p>
     </form>
     <form class="form" id="signup-form" style="display: none;">
       <h1>CEAways Sign Up</h1>
-      <input type="text" id="username" placeholder="Username">
-      <input type="text" id="email" placeholder="Email">
-      <input type="password" id="password" placeholder="Password">
-      <input type="submit" id="SignUp" value="Sign Up">Sign Up</button>
+      <input type="text" id="username" name="username" placeholder="Username">
+      <input type="text" id="email" name="email" placeholder="Email">
+      <input type="password" id="password" name="password" placeholder="Password">
+      
+      <input type="button" id="SignUp" value="Sign Up">Sign Up</button>
+      
       <p class="switch">Already have an account? <a href="#" onclick="toggleForms()">Sign In</a></p>
     </form>
   </div>
