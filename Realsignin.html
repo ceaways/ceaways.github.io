@@ -148,23 +148,6 @@ onAuthStateChanged(auth, (user) => {
   }
 });
 
-logout.addEventListener('click', (e) => {
-
-  signOut(auth).then(() => {
-
-    alert("User Logged out!");
-  // Sign-out successful.
-}).catch((error) => {
-    const errorCode = error.code;
-    const errorMessage = error.message;
-      
-          alert(errorMessage);
-        });
-  // An error happened.
-});
-  
-})
-    
 </script>
   
 </html>
