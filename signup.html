@@ -71,7 +71,7 @@
       <div>
         <p>Or sign up with:</p>
 
-        <input type="submit" class="social-signin google" id = "googlelogin" placeholder="Sign in with Google"> 
+        <input type="submit" class="social-signin google" id="googlelogin" placeholder="Sign in with Google"> 
         <!-- Placeholder for Google sign-up option -->
         <!-- You can add a Google sign-up button or link here in the future -->
       </div>
@@ -108,6 +108,7 @@
   const app = initializeApp(firebaseConfig);
   const database = getDatabase(app);
   const auth = getAuth();
+  const auth = getAuth(app);
   const provider = new GoogleAuthProvider(app);
 
     googlelogin.addEventListener('click',(e) => {
