@@ -82,36 +82,11 @@
       <p>Already have an account? <a href="#" onclick="showSignIn()">Sign In</a></p>
     </div>
   </div>
-
-  <div class="form-container" id="signin-form" style="display: none;">
-    <h1>Sign In</h1>
-    <form action="/signin" method="post">
-      <input type="text" placeholder="Username" name="username" required>
-      <input type="password" placeholder="Password" name="password" required>
-      <!-- Using the input element for the "Sign In" button with a custom class -->
-      <input type="submit" value="Sign In" class="input-button">
-    </form>
-    <div class="link-container">
-      <p>Or sign in with:</p>
-      <!-- Placeholder for Google sign-in option -->
-      <!-- You can add a Google sign-in button or link here in the future -->
-    </div>
     <div class="link-container">
       <p>Don't have an account? <a href="#" onclick="showSignUp()">Sign Up</a></p>
     </div>
   </div>
 
-  <script>
-    function showSignUp() {
-      document.getElementById("signup-form").style.display = "block";
-      document.getElementById("signin-form").style.display = "none";
-    }
-
-    function showSignIn() {
-      document.getElementById("signup-form").style.display = "none";
-      document.getElementById("signin-form").style.display = "block";
-    }
-  </script>
 </body>
 
 <script type="module">
@@ -124,13 +99,13 @@
 
   // Your web app's Firebase configuration
   const firebaseConfig = {
-    apiKey: "AIzaSyBvRui7Ey3DkSHUavLDtEHyKp9fMoEpT-c",
-    authDomain: "ceaways---interactive-map.firebaseapp.com",
-    databaseURL: "https://ceaways---interactive-map-default-rtdb.asia-southeast1.firebasedatabase.app",
-    projectId: "ceaways---interactive-map",
-    storageBucket: "ceaways---interactive-map.appspot.com",
-    messagingSenderId: "389516668854",
-    appId: "1:389516668854:web:ed099ff2045cc689bd9b17"
+    apiKey: "AIzaSyDv7ONkfSnd2B7Uy53ER2LYNDfFrERCvdw",
+    authDomain: "ceaways-a5099.firebaseapp.com",
+    databaseURL: "https://ceaways-a5099-default-rtdb.firebaseio.com",
+    projectId: "ceaways-a5099",
+    storageBucket: "ceaways-a5099.appspot.com",
+    messagingSenderId: "532683311836",
+    appId: "1:532683311836:web:940d66dae587932d52c219"
   };
 
   // Initialize Firebase
