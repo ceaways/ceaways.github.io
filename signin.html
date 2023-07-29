@@ -39,19 +39,18 @@
       box-sizing: border-box; /* Add this to include padding and border in the total width */
     }
 
-    button {
+    .input-button {
       width: 100%;
       padding: 10px;
-      background-color: #4caf50;
-      color: #fff;
+      background-color: #A4133C;
+      color: #ffffff;
       border: none;
-      border-radius: 4px;
+      border-radius: 5px;
       cursor: pointer;
-      font-size: 16px;
     }
 
-    button:hover {
-      background-color: #45a049;
+    .input-button:hover {
+      background-color: #8C0C2A;
     }
 
     .footer {
@@ -68,9 +67,17 @@
       <input type="text" id="email" name="email" placeholder="Email Address">
       <input type="password" id="password" name="password" placeholder="Password">
       
-      <input type="submit" id='signUp' name="signup_submit" value="Sign Up"/>
-
+      <input type="submit" class="input-button" id='signUp' name="signup_submit" value="Sign Up"/>
+      <div>
+        <p>Or sign up with:</p>
+        <!-- Placeholder for Google sign-up option -->
+        <!-- You can add a Google sign-up button or link here in the future -->
+      </div>
+      <div>
+        <p>Already have an account? <a href="#" onclick="showSignIn()">Sign In</a></p>
+      </div>
   </div>
+  
   <div class="footer">
     &copy; 2023 CEAways. All rights reserved.
   </div>
@@ -132,4 +139,3 @@
 </script>
   
 </html>
-
