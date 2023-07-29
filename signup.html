@@ -110,7 +110,7 @@
   const auth = getAuth(app);
   const provider = new GoogleAuthProvider(app);
 
-    googlelogin.addEventlistener('click',(e) => {
+    googlelogin.addEventListener('click',(e) => {
       signInWithRedirect(auth, provider);
 
       getRedirectResult(auth)
