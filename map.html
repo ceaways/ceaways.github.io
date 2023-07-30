@@ -2450,10 +2450,11 @@
 
 			const logoutButton = document.getElementById("logoutBtn");
 
-			logoutButton.addEventListener("click", () => {
+			logoutButton.addEventListener("click", (e) => {
 			  firebase.auth().signOut().then(() => {
 			    // After signing out, redirect the user to the home page or any other page as needed
-			    window.location.href = "ceaways.github.io"; // Replace with the desired URL
+				alert('User Logged out!');
+			    	window.location.href = "ceaways.github.io"; // Replace with the desired URL
 			  }).catch((error) => {
 			    // Handle any errors that might occur during the sign-out process
 			    console.error("Error signing out:", error);
