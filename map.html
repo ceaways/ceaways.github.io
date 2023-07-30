@@ -49,7 +49,7 @@
 						<a class="codrops-icon codrops-icon--prev" href="" title="Previous Demo"><span>Previous Demo</span></a>
 					</div>
 					<h1> CEAways Map</h1>
-					<input type="submit" class="logout-button" id='logout' name="logout" value="logout"/>
+					<button id="logoutBtn">Logout</button>
 				</header>
 				<div class="mall">
 					<div class="surroundings">
@@ -2448,20 +2448,16 @@
 				  }
 				});
 
+			const logoutButton = document.getElementById("logoutBtn");
 
-			logout.addEventListener('click', (e) => {
-
-			signOut(auth).then(() => {
-
-			alert("User Logged out!");
-			// Sign-out successful.
-			}).catch((error) => {
-			const errorCode = error.code;
-			const errorMessage = error.message;
-				
-					alert(errorMessage);
-				});
-			// An error happened.
+			logoutButton.addEventListener("click", () => {
+			  firebase.auth().signOut().then(() => {
+			    // After signing out, redirect the user to the home page or any other page as needed
+			    window.location.href = "https://www.example.com"; // Replace with the desired URL
+			  }).catch((error) => {
+			    // Handle any errors that might occur during the sign-out process
+			    console.error("Error signing out:", error);
+			  });
 			});
 	</script>
 </html>
