@@ -144,6 +144,8 @@ body {
       margin: 0;
     }
     .about-me-text p {
+      text-align: justify;
+      text-justify: inter-word;
       font-size: 15px;
       color: #585858;
       margin: 10px 0;
